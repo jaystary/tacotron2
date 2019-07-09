@@ -1,0 +1,40 @@
+--- /opt/conda/lib/python3.6/site-packages/torch/nn/modules/conv.py
++++ /opt/conda/lib/python3.6/site-packages/torch/nn/modules/conv.py
+@@ -75,9 +75,8 @@
+ 
+     Attributes:
+         weight (Tensor): the learnable weights of the module of shape
+-                         :math:`(\text{in\_channels}, \frac{\text{out\_channels}}{\text{groups}},`
+-                         :math:`\text{kernel\_size})`.
+-                         The values of these weights are sampled from
++                         :math:`(\text{in\_channels}, \frac{\text{out\_channels}}{\text{groups}},
++                               \text{kernel\_size})`. The values of these weights are sampled from
+                          :math:`\mathcal{U}(-\sqrt{k}, \sqrt{k})` where
+                          :math:`k = \frac{1}{C_\text{in} * \text{kernel\_size}}`
+         bias (Tensor):   the learnable bias of the module of shape (out_channels).
+@@ -87,8 +86,7 @@
+     """
+ 
+     def __init__(self, in_channels, out_channels, kernel_size, stride=1,
+-                 padding=0, output_padding=0, groups=1, bias=True,
+-                 dilation=1, padding_mode='zeros'):
++                 padding=0, output_padding=0, groups=1, bias=True, dilation=1):
+         kernel_size = _single(kernel_size)
+         stride = _single(stride)
+         padding = _single(padding)
+@@ -96,14 +94,11 @@
+         output_padding = _single(output_padding)
+         super(ConvTranspose1d, self).__init__(
+             in_channels, out_channels, kernel_size, stride, padding, dilation,
+-            True, output_padding, groups, bias, padding_mode)
++            True, output_padding, groups, bias)
+ 
+     @weak_script_method
+     def forward(self, input, output_size=None):
+         # type: (Tensor, Optional[List[int]]) -> Tensor
+-        if self.padding_mode != 'zeros':
+-            raise ValueError('Only `zeros` padding mode is supported for ConvTranspose1d')
+-
+         output_padding = self._output_padding(input, output_size, self.stride, self.padding, self.kernel_size)
+         return F.conv_transpose1d(
+             input, self.weight, self.bias, self.stride, self.padding,

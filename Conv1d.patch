@@ -1,0 +1,36 @@
+--- /opt/conda/lib/python3.6/site-packages/torch/nn/modules/conv.py
++++ /opt/conda/lib/python3.6/site-packages/torch/nn/modules/conv.py
+@@ -65,7 +65,6 @@
+         stride (int or tuple, optional): Stride of the convolution. Default: 1
+         padding (int or tuple, optional): Zero-padding added to both sides of
+             the input. Default: 0
+-        padding_mode (string, optional). Accepted values `zeros` and `circular` Default: `zeros`
+         dilation (int or tuple, optional): Spacing between kernel
+             elements. Default: 1
+         groups (int, optional): Number of blocked connections from input
+@@ -105,23 +104,17 @@
+     """
+ 
+     def __init__(self, in_channels, out_channels, kernel_size, stride=1,
+-                 padding=0, dilation=1, groups=1,
+-                 bias=True, padding_mode='zeros'):
++                 padding=0, dilation=1, groups=1, bias=True):
+         kernel_size = _single(kernel_size)
+         stride = _single(stride)
+         padding = _single(padding)
+         dilation = _single(dilation)
+         super(Conv1d, self).__init__(
+             in_channels, out_channels, kernel_size, stride, padding, dilation,
+-            False, _single(0), groups, bias, padding_mode)
++            False, _single(0), groups, bias)
+ 
+     @weak_script_method
+     def forward(self, input):
+-        if self.padding_mode == 'circular':
+-            expanded_padding = ((self.padding[0] + 1) // 2, self.padding[0] // 2)
+-            return F.conv1d(F.pad(input, expanded_padding, mode='circular'),
+-                            self.weight, self.bias, self.stride,
+-                            _single(0), self.dilation, self.groups)
+         return F.conv1d(input, self.weight, self.bias, self.stride,
+                         self.padding, self.dilation, self.groups)
+ 

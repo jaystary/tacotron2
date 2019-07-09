@@ -1,0 +1,11 @@
+--- /home/dcg-adlr-rafaelvalle-source.cosmos597/repos/nvidia/waveglow/glow.py
++++ /home/dcg-adlr-rafaelvalle-source.cosmos597/repos/nvidia/waveglow/glow.py
+@@ -27,7 +27,7 @@
+         if reverse:
+             if not hasattr(self, 'W_inverse'):
+                 # Reverse computation
+-                W_inverse = W.float().inverse()
++                W_inverse = W.inverse()
+                 W_inverse = Variable(W_inverse[..., None])
+                 if z.type() == 'torch.cuda.HalfTensor':
+                     W_inverse = W_inverse.half()

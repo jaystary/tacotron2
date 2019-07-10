@@ -28,7 +28,7 @@ class Tacotron2Logger(SummaryWriter):
 
         # plot alignment, mel target and predicted, gate target and predicted
         idx = random.randint(0, alignments.size(0) - 1)
-        self.add_image(
+        '''self.add_image(
             "alignment",
             plot_alignment_to_numpy(alignments[idx].data.cpu().numpy().T),
             iteration)
@@ -46,3 +46,4 @@ class Tacotron2Logger(SummaryWriter):
                 gate_targets[idx].data.cpu().numpy(),
                 torch.sigmoid(gate_outputs[idx]).data.cpu().numpy()),
             iteration)
+            '''

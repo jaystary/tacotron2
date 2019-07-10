@@ -5,6 +5,7 @@ sys.path.append('waveglow/')
 import numpy as np
 import torch
 import torchaudio
+import random
 
 from hparams import create_hparams
 from model import Tacotron2
@@ -55,7 +56,10 @@ class Inference:
         with torch.no_grad():
             audio = waveglow.infer(mel_outputs_postnet, sigma=0.666)
 
-        return torchaudio.save('amazing_sound.wav', audio[0].data.cpu().long(), self.hparams.sampling_rate)
+        filename = str(random.randint(1, 101)) + 'audio.wav'
+
+        torchaudio.save(filename, audio[0].data.cpu().long(), self.hparams.sampling_rate)
+        return filename
 
 
         #return ipd.Audio(audio[0].data.cpu().numpy(), rate=self.hparams.sampling_rate)

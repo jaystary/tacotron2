@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+</head>
+
+
+<body>
+
+
+<form id="register_form" action="http://locahost:8888" method="post" enctype="multipart/form-data">
+  <input type="text" placeholder=Text" name="sentence" title="Type your text">
+  <button value="Submit" type="submit">Send</button><br></br><br></br><br></br>
+</form>
+
+
+
+<button type="button" id='dy-howler-play'>Play</button>
+			<button type="button" id='dy-howler-pause'>Pause</button>
+			<button type="button" id='dy-howler-stop'>Stop</button>
+			<button type="button" id='dy-howler-volup'>Vol+</button>
+			<button type="button" id='dy-howler-voldown'>Vol-</button>
+
+            <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
+
+<script>
+$(function(){
+	var howler_example = new Howl({
+        
+		src: ['audio/Sample.mp3'],
+		volume: 0.5
+	});
+
+	$("#dy-howler-play").on("click", function(){
+		howler_example.play();
+	});
+
+	$("#dy-howler-pause").on("click", function(){
+		howler_example.pause();
+	});
+
+	$("#dy-howler-stop").on("click", function(){
+		howler_example.stop();
+	});
+
+	$("#dy-howler-volup").on("click", function(){
+		var vol = howler_example.volume();
+		vol += 0.1;
+		if (vol > 1) {
+			vol = 1;
+		}
+		howler_example.volume(vol);
+	});
+
+	$("#dy-howler-voldown").on("click", function(){
+		var vol = howler_example.volume();
+		vol -= 0.1;
+		if (vol < 0) {
+			vol = 0;
+		}
+		howler_example.volume(vol);
+	});
+
+});
+</script>      
+
+<script>
+const serialize_form = form => JSON.stringify(
+  Array.from(new FormData(form).entries())
+       .reduce((m, [ key, value ]) => Object.assign(m, { [key]: value }), {})
+);
+
+$('#register_form').on('submit', function(event) {
+  event.preventDefault();
+  const json = serialize_form(this);
+  console.log(jsonval)
+  $.ajax({
+    type: 'POST',
+    url: 'http://18.209.109.196:8888/',
+    dataType: 'json',
+    data: json,
+    contentType: 'application/json;charset=UTF-8',
+    success: function(data) {
+		console.log(data)
+      alert(data)
+    }
+  });
+});
+</script>
+
+
+
+</body>
+</html>

@@ -7,8 +7,8 @@
 
 <body>
 
-
-<form id="register_form" action="http://locahost:8888" method="post" enctype="multipart/form-data">
+<h2>the text is: {{ sentence }}</h2>
+<form action = "/" method = "POST">
   <input type="text" placeholder=Text" name="sentence" title="Type your text">
   <button value="Submit" type="submit">Send</button><br></br><br></br><br></br>
 </form>
@@ -28,10 +28,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
 
 <script>
+
 $(function(){
 	var howler_example = new Howl({
         
-		src: ['audio/Sample.mp3'],
+		src: ['{{ sentence }}'],
 		volume: 0.5
 	});
 
@@ -67,30 +68,6 @@ $(function(){
 
 });
 </script>      
-
-<script>
-const serialize_form = form => JSON.stringify(
-  Array.from(new FormData(form).entries())
-       .reduce((m, [ key, value ]) => Object.assign(m, { [key]: value }), {})
-);
-
-$('#register_form').on('submit', function(event) {
-  event.preventDefault();
-  const json = serialize_form(this);
-  console.log(jsonval)
-  $.ajax({
-    type: 'POST',
-    url: 'http://18.209.109.196:8888/',
-    dataType: 'json',
-    data: json,
-    contentType: 'application/json;charset=UTF-8',
-    success: function(data) {
-		console.log(data)
-      alert(data)
-    }
-  });
-});
-</script>
 
 
 

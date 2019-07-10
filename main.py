@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request
+from flask import request, render_template
 from flask import send_file
 
 from inference import Inference
@@ -12,8 +12,24 @@ model, waveglow = inference.load_model()
 
 
 
-app = Flask(__name__)
-@app.route('/', methods=['GET','POST'])
+app = Flask(__name__, template_folder='static')
+
+
+@app.route('/',methods = ['POST', 'GET'])
+def result():
+    if request.method == 'POST':
+        result = request.form['sentence']
+        output = inference.infer(result, waveglow, model)
+        templateData = {
+            'sentence': output
+        }
+        return render_template('index.html', **templateData)
+
+    return render_template('index.html')
+
+
+
+'''@app.route('/', methods=['GET','POST'])
 def start():
 
     req_data = request.get_json()
@@ -27,10 +43,7 @@ def start():
         mimetype="audio/wav",
         as_attachment=True,
         attachment_filename="output.wav")
+'''
 
-
-@app.route('/index')
-def index():
-    return "Send me another flask response"
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80, debug = True)
+    app.run(host="0.0.0.0", port=8888, debug = True)

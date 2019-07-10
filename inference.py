@@ -56,7 +56,7 @@ class Inference:
         with torch.no_grad():
             audio = waveglow.infer(mel_outputs_postnet, sigma=0.666)
 
-        filename = str(random.randint(1, 101)) + 'audio.wav'
+        filename = "static/generatedAudio/"+str(random.randint(1, 101)) + 'audio.wav'
 
         torchaudio.save(filename, audio[0].data.cpu().long(), self.hparams.sampling_rate)
         return filename

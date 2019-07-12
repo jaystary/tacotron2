@@ -2,26 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="static/stylesheet.css">
 </head>
 
 
 <body>
 
-Please provide some text(english only):
+<p class="demoFont">Please provide some text(english only):</p>
 <form action = "/" method = "POST">
     <textarea rows = "5" cols = "60" name = "sentence"></textarea>
-  <br></br><button value="Submit" type="submit">Send</button><br></br>
+  <br></br><button value="Submit" type="submit" class="myButton">Send</button><br></br>
 </form>
 
 
 
-<button type="button" id='dy-howler-play'>Play</button>
-<button type="button" id='dy-howler-pause'>Pause</button>
-<button type="button" id='dy-howler-stop'>Stop</button>
-<button type="button" id='dy-howler-volup'>Vol+</button>
-<button type="button" id='dy-howler-voldown'>Vol-</button>
+<button type="button" id='dy-howler-play' class="myButton">Play</button>
+<button type="button" id='dy-howler-pause' class="myButton">Pause</button>
+<button type="button" id='dy-howler-stop' class="myButton">Stop</button>
+<button type="button" id='dy-howler-volup' class="myButton">Vol+</button>
+<button type="button" id='dy-howler-voldown' class="myButton">Vol-</button>
+<br><br>
+<p class="demoFont">Time for processing in ms: {{ time }}</p>
 <br>
-Time for processing in ms: {{ time }}
+<p class="demoFont">Sentence: {{ sentence_value }}</p>
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"

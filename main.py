@@ -13,7 +13,7 @@ inference.load_model()
 app = Flask(__name__, template_folder='static')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET', 'POST'])
 def result():
     if request.method == 'POST':
         val = request.form['sentence']

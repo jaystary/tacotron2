@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef5d62f1-4166-4c81-bd60-2ef3bff469dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tacotron2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tacotron2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/inference.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/tacotron2$main.coverage" NAME="main Coverage Results" MODIFIED="1562921480650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tacotron2$main.coverage" NAME="main Coverage Results" MODIFIED="1562924088522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -40,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/inference.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="49" column="20" lean-forward="true" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
+            <state relative-caret-position="120">
+              <caret line="8" column="27" lean-forward="true" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -52,8 +52,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+            <state relative-caret-position="242">
+              <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -66,6 +66,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="192">
               <caret line="174" selection-start-line="174" selection-end-line="174" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.3/remote_sources/1347882052/1182481732/werkzeug/serving.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="332">
+              <caret line="986" selection-start-line="986" selection-end-line="986" />
             </state>
           </provider>
         </entry>
@@ -83,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/helper.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -96,18 +105,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="585">
               <caret line="39" column="30" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.3/remote_sources/1347882052/1182481732/torchaudio/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#47#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -137,6 +134,7 @@
       <find>gate</find>
       <find>audio</find>
       <find>half</find>
+      <find>inf</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -161,6 +159,7 @@
     <option name="width" value="1448" />
     <option name="height" value="974" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -177,6 +176,11 @@
               <item name="tacotron2" type="b2602c69:ProjectViewProjectNode" />
               <item name="tacotron2" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tacotron2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tacotron2" type="462c0819:PsiDirectoryNode" />
+              <item name="waveglow" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -255,12 +259,12 @@
       <workItem from="1562713986913" duration="476000" />
       <workItem from="1562714498302" duration="184000" />
       <workItem from="1562714707561" duration="14284000" />
-      <workItem from="1562814073590" duration="10188000" />
+      <workItem from="1562814073590" duration="12090000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34924000" />
+    <option name="totallyTimeSpent" value="36826000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -273,15 +277,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1468" y="316" width="1448" height="974" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30512092" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30512092" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49928877" weight="0.32993197" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49288762" visible="true" weight="0.31632653" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49288762" visible="true" weight="0.31632653" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49928877" weight="0.32879817" />
@@ -390,13 +393,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.3/remote_sources/1347882052/1182481732/werkzeug/serving.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14700">
-          <caret line="995" column="30" selection-start-line="995" selection-start-column="30" selection-end-line="995" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -438,7 +434,7 @@
     <entry file="file://$PROJECT_DIR$/helper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
@@ -459,16 +455,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/train.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
@@ -482,14 +468,31 @@
     <entry file="file://$PROJECT_DIR$/inference.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
-          <selected id="15" />
+          <selected id="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/inference.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="49" column="20" lean-forward="true" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
+        <state relative-caret-position="120">
+          <caret line="8" column="27" lean-forward="true" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.3/remote_sources/1347882052/1182481732/werkzeug/serving.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="986" selection-start-line="986" selection-end-line="986" />
         </state>
       </provider>
     </entry>

@@ -61,7 +61,7 @@ class Inference:
 
         print(type(audio))
 
-        filename = "static/generatedAudio/"+str(random.randint(1, 101)) + 'audio.wav'
+        filename = "static/generatedAudio/"+str(random.randint(100, 1000)) + 'audio.wav'
 
         audio_denoised = self.denoiser(audio, strength=0.01)[:, 0]
         audio_denoised = audio_denoised.data.cpu().float()

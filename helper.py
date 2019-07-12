@@ -6,14 +6,17 @@ import random
 def split_sentences(sentence):
     new_list = []
     sentence.replace('....', '.').replace('...', '.').replace('..', '.')
-    re.split(r'[.;!?]+', sentence)
-    for s in sentence:
-        new_list.append(s.strip())
+    ends = ['.', '!', '?']
+    split_sentence = re.split('\.+|\!+|\?+|', sentence)
+    for s in split_sentence:
+        if len(s)>3:
+            val = s.strip()
+            contains_delimiter = checkEnds(val, ends)
+            if not contains_delimiter:
+                val += '.'
+            new_list.append(val)
 
-    
-
-    return new_list()
-
+    return new_list
 
 
 #takes list of wav files and merges them to one
@@ -32,5 +35,9 @@ def merge_wav(filename_list):
     filename = "static/generatedAudio/" + str(random.randint(1, 101)) + 'generated.wav'
     combined_wav.export(filename, format="wav")
     return filename
+
+
+def checkEnds(line, ends):
+    return any(line.endswith(end) for end in ends)
 
 

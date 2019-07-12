@@ -3,6 +3,7 @@ from flask import request, render_template
 from flask import send_file
 import helper
 import concurrent.futures
+import datetime
 
 from inference import Inference
 
@@ -21,26 +22,35 @@ def result():
         sentence_list = helper.split_sentences(val)
         result_list = []
         result = None
-
+        start = datetime.datetime.now()
         #with concurrent.futures.ProcessPoolExecutor() as pool:
+        count = 0
         for s in sentence_list:
             if s:
+                print(count, " ", s)
                 result_list.append(inference.infer(s))
+                count += 1
+
             #future_result = pool.submit(inference.infer, s)
             #future_result.add_done_callback(result_list)
 
         if len(sentence_list) > 1:
             result = helper.merge_wav(result_list)
         else:
-            result = result_list[0]
+            if len(result_list==1):
+                result = result_list[0]
 
-        templateData = {
-            'sentence': result
+        stop = datetime.datetime.now()
+        time = (stop - start) /1000
+
+        template_data = {
+            'sentence': result,
+            'time': str(time.microseconds)
         }
-        return render_template('index.html', **templateData)
+        return render_template('index.html', **template_data)
 
     return render_template('index.html')
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8888, debug = True)
+    app.run(host="0.0.0.0", port=8888, debug = False)

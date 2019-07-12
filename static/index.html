@@ -10,16 +10,18 @@
 Please type your text (english only):
 <form action = "/" method = "POST">
     <textarea rows = "5" cols = "60" name = "sentence"></textarea>
-  <br></br><button value="Submit" type="submit">Send</button><br></br><br></br><br></br>
+  <br></br><button value="Submit" type="submit">Send</button><br></br>
 </form>
 
 
 
 <button type="button" id='dy-howler-play'>Play</button>
-			<button type="button" id='dy-howler-pause'>Pause</button>
-			<button type="button" id='dy-howler-stop'>Stop</button>
-			<button type="button" id='dy-howler-volup'>Vol+</button>
-			<button type="button" id='dy-howler-voldown'>Vol-</button>
+<button type="button" id='dy-howler-pause'>Pause</button>
+<button type="button" id='dy-howler-stop'>Stop</button>
+<button type="button" id='dy-howler-volup'>Vol+</button>
+<button type="button" id='dy-howler-voldown'>Vol-</button>
+<br>
+Time for processing in ms: {{ time }}
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"

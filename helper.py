@@ -1,4 +1,4 @@
-import audiolab, scipy
+from pydub import AudioSegment
 import re
 
 
@@ -8,11 +8,20 @@ def split_sentences(sentence):
 
 
 #takes list of wav files and merges them to one
-def merge_wav():
-    a, fs, enc = audiolab.wavread('file1.wav')
-    b, fs, enc = audiolab.wavread('file2.wav')
-    c = scipy.vstack((a, b))
-    audiolab.wavwrite(c, 'file3.wav', fs, enc)
-    return rt
+def merge_wav(filename_list):
+
+    wav_list = []
+    combined_wav = None
+
+    for f in filename_list:
+        wav_list.append(AudioSegment.from_wav(f))
+
+    for w in wav_list:
+        combined_wav = combined_wav + w
+
+
+    filename = "static/generatedAudio/" + str(random.randint(1, 101)) + 'generated.wav'
+    combined_sounds.export(filename, format="wav")
+    return filename
 
 

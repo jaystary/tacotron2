@@ -1,7 +1,0 @@
-[I 21:54:56.857 NotebookApp] Writing notebook server cookie secret to /run/user/1000/jupyter/notebook_cookie_secret
-[I 21:55:01.555 NotebookApp] Serving notebooks from local directory: /home/ubuntu/tds/tacatron/tacotron2
-[I 21:55:01.555 NotebookApp] The Jupyter Notebook is running at:
-[I 21:55:01.555 NotebookApp] http://localhost:8888/
-[I 21:55:01.555 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
-[I 21:55:38.405 NotebookApp] Interrupted...
-[I 21:55:38.406 NotebookApp] Shutting down 0 kernels

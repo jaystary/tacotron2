@@ -1,81 +1,52 @@
-# Tacotron 2 (without wavenet)
+# Tacotron 2 Including Inference
 
 PyTorch implementation of [Natural TTS Synthesis By Conditioning
 Wavenet On Mel Spectrogram Predictions](https://arxiv.org/pdf/1712.05884.pdf). 
 
-This implementation includes **distributed** and **automatic mixed precision** support
-and uses the [LJSpeech dataset](https://keithito.com/LJ-Speech-Dataset/).
+Original implementation from https://github.com/NVIDIA/tacotron2
 
-Distributed and Automatic Mixed Precision support relies on NVIDIA's [Apex] and [AMP].
-
-Visit our [website] for audio samples using our published [Tacotron 2] and
-[WaveGlow] models.
-
-![Alignment, Predicted Mel Spectrogram, Target Mel Spectrogram](tensorboard.png)
+This implementation contains an API (with Flask as Framework) that can consume POST requests that transform
+Text into WAV-files which then are stored and can be downloaded/played back. 
+It is an adaption of the included IPython Notebook
+with a few adjustments in the inference code.
 
 
-## Pre-requisites
-1. NVIDIA GPU + CUDA cuDNN
+The inference code had some issues that originated from newer versions of 
+Pytorch / Numpy, which have been adjusted.
 
-## Setup
-1. Download and extract the [LJ Speech dataset](https://keithito.com/LJ-Speech-Dataset/)
-2. Clone this repo: `git clone https://github.com/NVIDIA/tacotron2.git`
-3. CD into this repo: `cd tacotron2`
-4. Initialize submodule: `git submodule init; git submodule update`
-5. Update .wav paths: `sed -i -- 's,DUMMY,ljs_dataset_folder/wavs,g' filelists/*.txt`
-    - Alternatively, set `load_mel_from_disk=True` in `hparams.py` and update mel-spectrogram paths 
-6. Install [PyTorch 1.0]
-7. Install [Apex]
-8. Install python requirements or build docker image 
-    - Install python requirements: `pip install -r requirements.txt`
+[Waveglow](https://github.com/NVIDIA/waveglow) is used to generated audio from mel-spectograms.
 
-## Training
-1. `python train.py --output_directory=outdir --log_directory=logdir`
-2. (OPTIONAL) `tensorboard --logdir=outdir/logdir`
+There is no streaming of audio data implemented.
 
-## Training using a pre-trained model
-Training using a pre-trained model can lead to faster convergence  
-By default, the dataset dependent text embedding layers are [ignored]
+For inference you will need:
+For generating Mel-Spectograms from Text:
 
-1. Download our published [Tacotron 2] model
-2. `python train.py --output_directory=outdir --log_directory=logdir -c tacotron2_statedict.pt --warm_start`
+[Tacotron2 Model](https://drive.google.com/file/d/1c5ZTuT7J08wLUoVZ2KkUs_VdZuJ86ZqA/view?usp=sharing)
 
-## Multi-GPU (distributed) and Automatic Mixed Precision Training
-1. `python -m multiproc train.py --output_directory=outdir --log_directory=logdir --hparams=distributed_run=True,fp16_run=True`
+[Selftrained](https://jaystarymlmodels.s3.amazonaws.com/tacotron_trained.pt) (Quality is a bit lower):
 
-## Inference demo
-1. Download our published [Tacotron 2] model
-2. Download our published [WaveGlow] model
-3. `jupyter notebook --ip=127.0.0.1 --port=31337`
-4. Load inference.ipynb 
+For generating Speech Synthesis from Mel-Spectograms:
+[WaveGlow Model](https://drive.google.com/file/d/1WsibBTsuRg_SF2Z6L6NFRTT-NjEy1oTx/view?usp=sharing)
 
-N.b.  When performing Mel-Spectrogram to Audio synthesis, make sure Tacotron 2
-and the Mel decoder were trained on the same mel-spectrogram representation. 
+Training and running this model requires a GPU / TPU.
 
 
-## Related repos
-[WaveGlow](https://github.com/NVIDIA/WaveGlow) Faster than real time Flow-based
-Generative Network for Speech Synthesis
+####API:
 
-[nv-wavenet](https://github.com/NVIDIA/nv-wavenet/) Faster than real time
-WaveNet.
+Renders index.html:
 
-## Acknowledgements
-This implementation uses code from the following repos: [Keith
-Ito](https://github.com/keithito/tacotron/), [Prem
-Seetharaman](https://github.com/pseeth/pytorch-stft) as described in our code.
-
-We are inspired by [Ryuchi Yamamoto's](https://github.com/r9y9/tacotron_pytorch)
-Tacotron PyTorch implementation.
-
-We are thankful to the Tacotron 2 paper authors, specially Jonathan Shen, Yuxuan
-Wang and Zongheng Yang.
+curl --location --request POST "ip:port/" \
+  --header "Content-Type: application/json" \
+  --form "sentence=xxxxxxxx"
 
 
-[WaveGlow]: https://drive.google.com/file/d/1WsibBTsuRg_SF2Z6L6NFRTT-NjEy1oTx/view?usp=sharing
-[Tacotron 2]: https://drive.google.com/file/d/1c5ZTuT7J08wLUoVZ2KkUs_VdZuJ86ZqA/view?usp=sharing
-[pytorch 1.0]: https://github.com/pytorch/pytorch#installation
-[website]: https://nv-adlr.github.io/WaveGlow
-[ignored]: https://github.com/NVIDIA/tacotron2/blob/master/hparams.py#L22
-[Apex]: https://github.com/nvidia/apex
-[AMP]: https://github.com/NVIDIA/apex/tree/master/apex/amp
+Returns WAV-file:
+
+curl --location --request POST "ip:port/api" \
+  --header "Content-Type: application/json" \
+  --data "{
+    \"sentence\": \"xxxxxxxx\"
+}"
+
+
+

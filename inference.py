@@ -24,10 +24,6 @@ class Inference:
         self.waveglow = None
         self.denoiser = None
 
-    #model = None
-    #waveglow = None
-    #denoiser = None
-
 
     def load_model(self):
         self.hparams.sampling_rate = 22050
@@ -36,6 +32,8 @@ class Inference:
         _ = self.model.cuda().eval().half()
 
         self.waveglow = torch.load(self.waveglow_path)['model']
+
+        #workaround for newer numpy library that uses padding mode
         for m in self.waveglow.modules():
             if 'Conv' in str(type(m)):
                 setattr(m, 'padding_mode', 'zeros')
@@ -59,11 +57,10 @@ class Inference:
         with torch.no_grad():
             audio = self.waveglow.infer(mel_outputs_postnet, sigma=0.666)
 
-        print(type(audio))
-
-        filename = "static/generatedAudio/"+str(random.randint(100, 1000)) + 'audio.wav'
+        filename = "static/generatedAudio/"+str(random.randint(1, 50)) + 'audio.wav'
 
         audio_denoised = self.denoiser(audio, strength=0.01)[:, 0]
+        #torchaudio requires half tensors on the cpu in order to write out the files.
         audio_denoised = audio_denoised.data.cpu().float()
 
         torchaudio.save(filename, audio_denoised, self.hparams.sampling_rate)

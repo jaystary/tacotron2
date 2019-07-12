@@ -1,6 +1,7 @@
 from pydub import AudioSegment
 import re
 import random
+import datetime
 
 
 def split_sentences(sentence):
@@ -9,7 +10,7 @@ def split_sentences(sentence):
     ends = ['.', '!', '?']
     split_sentence = re.split('\.+|\!+|\?+|', sentence)
     for s in split_sentence:
-        if len(s)>3:
+        if len(s) > 3:
             val = s.strip()
             contains_delimiter = checkEnds(val, ends)
             if not contains_delimiter:
@@ -19,8 +20,10 @@ def split_sentences(sentence):
     return new_list
 
 
-#takes list of wav files and merges them to one
 def merge_wav(filename_list):
+
+    now = datetime.now()
+    timestamp = datetime.timestamp(now)
 
     wav_list = []
     combined_wav = AudioSegment.empty()
@@ -31,8 +34,7 @@ def merge_wav(filename_list):
     for w in wav_list:
         combined_wav += w
 
-
-    filename = "static/generatedAudio/" + str(random.randint(1, 101)) + 'generated.wav'
+    filename = "static/generatedAudio/" + str(timestamp) + str(random.randint(1, 20)) + '.wav'
     combined_wav.export(filename, format="wav")
     return filename
 

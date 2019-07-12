@@ -45,7 +45,19 @@ class Inference:
 
 
 
-    def infer(self, input, waveglow, model):
+    def infer(self, input):
+        self.hparams.sampling_rate = 22050
+        model = load_model(self.hparams)
+        model.load_state_dict(torch.load(self.checkpoint_path)['state_dict'])
+        _ = model.cuda().eval().half()
+
+        waveglow = torch.load(self.waveglow_path)['model']
+        for m in waveglow.modules():
+            if 'Conv' in str(type(m)):
+                setattr(m, 'padding_mode', 'zeros')
+        waveglow.cuda().eval().half()
+        for k in waveglow.convinv:
+            k.float()
         sequence = np.array(text_to_sequence(input, ['english_cleaners']))[None, :]
         sequence = torch.autograd.Variable(
             torch.from_numpy(sequence)).cuda().long()

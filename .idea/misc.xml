@@ -3,5 +3,5 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.5.2 (sftp://ubuntu@18.209.109.196:22/usr/bin/python3)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.5.2 (sftp://ubuntu@3.221.52.163:22/usr/bin/python3)" project-jdk-type="Python SDK" />
 </project>

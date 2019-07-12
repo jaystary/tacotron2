@@ -22,16 +22,22 @@ def result():
         val = request.form['sentence']
         sentence_list = helper.split_sentences(val)
         result_list = []
+        result = None
 
-        with concurrent.futures.ProcessPoolExecutor() as pool:
-            for s in sentence_list:
-                future_result = pool.submit(inference.infer, s)
-                future_result.add_done_callback(result_list)
+        #with concurrent.futures.ProcessPoolExecutor() as pool:
+        for s in sentence_list:
+            if s:
+                result_list.append(inference.infer(s))
+            #future_result = pool.submit(inference.infer, s)
+            #future_result.add_done_callback(result_list)
 
-        print(result)
-        output = inference.infer(result)
+        if len(sentence_list) > 1:
+            result = helper.merge_wav(result_list)
+        else:
+            result = result_list[0]
+
         templateData = {
-            'sentence': output
+            'sentence': result
         }
         return render_template('index.html', **templateData)
 

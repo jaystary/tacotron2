@@ -13,6 +13,7 @@ from layers import TacotronSTFT, STFT
 from audio_processing import griffin_lim
 from train import load_model
 from text import text_to_sequence
+from denoiser import Denoiser
 
 
 class Inference:
@@ -46,6 +47,7 @@ class Inference:
 
 
     def infer(self, input):
+        audio = None
         self.hparams.sampling_rate = 22050
         model = load_model(self.hparams)
         model.load_state_dict(torch.load(self.checkpoint_path)['state_dict'])
@@ -60,7 +62,7 @@ class Inference:
             k.float()
         sequence = np.array(text_to_sequence(input, ['english_cleaners']))[None, :]
         sequence = torch.autograd.Variable(
-            torch.from_numpy(sequence)).cuda().long()
+            torch.from_numpy(sequence)).cuda()
 
         mel_outputs, mel_outputs_postnet, _, alignments = model.inference(sequence)
 
@@ -68,9 +70,15 @@ class Inference:
         with torch.no_grad():
             audio = waveglow.infer(mel_outputs_postnet, sigma=0.666)
 
+        print(type(audio))
+
         filename = "static/generatedAudio/"+str(random.randint(1, 101)) + 'audio.wav'
 
-        torchaudio.save(filename, audio[0].data.cpu().long(), self.hparams.sampling_rate)
+        audio_denoised = denoiser(audio, strength=0.01)[:, 0]
+        #ipd.Audio(audio_denoised.cpu().numpy(), rate=hparams.sampling_rate)
+
+        #torchaudio.save(filename, audio[0].data.cpu().long(), self.hparams.sampling_rate)
+        torchaudio.save(filename, audio_denoised.data.cpu().long(), self.hparams.sampling_rate)
         return filename
 
 

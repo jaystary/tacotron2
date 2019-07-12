@@ -7,10 +7,8 @@ import concurrent.futures
 from inference import Inference
 
 
-model = None
-waveglow = None
 inference = Inference()
-
+inference.load_model()
 
 
 app = Flask(__name__, template_folder='static')

@@ -1,11 +1,11 @@
-# Tacotron 2 Including Inference
+# Tacotron 2 Including Inference - currently work in progress
 
 PyTorch implementation of [Natural TTS Synthesis By Conditioning
 Wavenet On Mel Spectrogram Predictions](https://arxiv.org/pdf/1712.05884.pdf). 
 
 Original implementation from https://github.com/NVIDIA/tacotron2
 
-This implementation contains an API (with Flask as Framework) that can consume POST requests that transform
+This implementation contains an API (with Flask as Framework) that can consume POST requests that transforms
 Text into WAV-files which then are stored and can be downloaded/played back. 
 It is an adaption of the included IPython Notebook
 with a few adjustments in the inference code.
@@ -30,22 +30,5 @@ For generating Speech Synthesis from Mel-Spectograms:
 Training and running this model requires a GPU / TPU.
 
 
-####API:
-
-Renders index.html:
-
-curl --location --request POST "ip:port/" \
-  --header "Content-Type: application/json" \
-  --form "sentence=xxxxxxxx"
-
-
-Returns WAV-file:
-
-curl --location --request POST "ip:port/api" \
-  --header "Content-Type: application/json" \
-  --data "{
-    \"sentence\": \"xxxxxxxx\"
-}"
-
-Currently working on implementing a stream solution that can take longer texts as input and get processed in chunks as output
+Currently working on implementing a streaming solution that can take longer texts as input and get processed in chunks as output and displayed in a frontend. After that i want to implement batch processing where one can run big TTS jobs in the background.
 

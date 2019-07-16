@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import torchaudio
 import random
+import helper
 
 from hparams import create_hparams
 from model import Tacotron2
@@ -44,7 +45,7 @@ class Inference:
         self.denoiser = Denoiser(self.waveglow)
 
 
-    def infer(self, input):
+    def infer(self, input, que):
         audio = None
 
         sequence = np.array(text_to_sequence(input, ['english_cleaners']))[None, :]
@@ -63,5 +64,21 @@ class Inference:
         #torchaudio requires half tensors on the cpu in order to write out the files.
         audio_denoised = audio_denoised.data.cpu().float()
 
+        #This needs to trigger a callback to trigger a stream
+        que.put(audio_denoised)
+
         torchaudio.save(filename, audio_denoised, self.hparams.sampling_rate)
         return filename
+
+
+    def prepare_inference(self, val, que):
+        sentence_list = helper.split_sentences(val)
+        result_list = []
+
+        count = 0
+        for s in sentence_list:
+            if s:
+                self.infer(s, que)
+
+
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        if (!!window.EventSource) {
+          var source = new EventSource('{{ url_for("text") }}');
+          source.onmessage = function(e) {
+            $("#text").text(e.data);
+          }
+        }
+    </script>
+
+    <audio controls>
+        <source src="{{ url_for('audio') }}" type="audio/x-wav;codec=pcm">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="text"></div>
+</body>
+</html>

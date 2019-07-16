@@ -12,11 +12,10 @@ with a few adjustments in the inference code.
 
 
 The inference code had some issues that originated from newer versions of 
-Pytorch / Numpy, which have been adjusted.
+Pytorch / Numpy, which have been adjusted (as commented in code).
 
 [Waveglow](https://github.com/NVIDIA/waveglow) is used to generated audio from mel-spectograms.
 
-There is no streaming of audio data implemented.
 
 For inference you will need:
 For generating Mel-Spectograms from Text:
@@ -48,5 +47,5 @@ curl --location --request POST "ip:port/api" \
     \"sentence\": \"xxxxxxxx\"
 }"
 
-
+Currently working on implementing a stream solution that can take longer texts as input and get processed in chunks as output
 

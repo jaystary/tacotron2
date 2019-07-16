@@ -1,25 +1,42 @@
-from pydub import AudioSegment
+#from pydub import AudioSegment
 import re
 import random
 import datetime
-
+import time
+import queue
+import asyncio
 
 def split_sentences(sentence):
-    new_list = []
+    que_list = queue.Queue()
     sentence.replace('....', '.').replace('...', '.').replace('..', '.')
     ends = ['.', '!', '?']
-    split_sentence = re.split('\.+|\!+|\?+|', sentence)
+    split_sentence = re.split(r'[\.\!\?]', sentence)
     for s in split_sentence:
         if len(s) > 3:
             val = s.strip()
             contains_delimiter = checkEnds(val, ends)
             if not contains_delimiter:
                 val += '.'
-            new_list.append(val)
+            que_list.put(val)
 
-    return new_list
+    return que_list
 
 
+def do_something_with_sentences(que):
+
+    que.get()
+
+    return True
+
+
+def example(seconds):
+    print('Starting task')
+    for i in range(seconds):
+        print(i)
+        time.sleep(1)
+    print('Task completed')
+
+'''
 def merge_wav(filename_list):
 
     now = datetime.now()
@@ -37,9 +54,17 @@ def merge_wav(filename_list):
     filename = "static/generatedAudio/" + str(timestamp) + str(random.randint(1, 20)) + '.wav'
     combined_wav.export(filename, format="wav")
     return filename
+'''
 
 
 def checkEnds(line, ends):
     return any(line.endswith(end) for end in ends)
+
+
+def calculate_position_percent(cur, total):
+    return (cur / total)*100
+
+
+
 
 

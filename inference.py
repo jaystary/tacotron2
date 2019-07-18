@@ -45,30 +45,28 @@ class Inference:
         self.denoiser = Denoiser(self.waveglow)
 
 
-    def infer(self, input, que):
-        audio = None
+def infer(self, input, que):
+    audio = None
 
-        sequence = np.array(text_to_sequence(input, ['english_cleaners']))[None, :]
-        sequence = torch.autograd.Variable(
-            torch.from_numpy(sequence)).cuda()
+    sequence = np.array(text_to_sequence(input, ['english_cleaners']))[None, :]
+    sequence = torch.autograd.Variable(
+        torch.from_numpy(sequence)).cuda()
 
-        mel_outputs, mel_outputs_postnet, _, alignments = self.model.inference(sequence)
+    mel_outputs, mel_outputs_postnet, _, alignments = self.model.inference(sequence)
 
 
-        with torch.no_grad():
-            audio = self.waveglow.infer(mel_outputs_postnet, sigma=0.666)
+    with torch.no_grad():
+        audio = self.waveglow.infer(mel_outputs_postnet, sigma=0.666)
 
-        filename = "static/generatedAudio/"+str(random.randint(1, 50)) + 'audio.wav'
+    filename = "static/generatedAudio/"+str(random.randint(1, 50)) + 'audio.wav'
 
-        audio_denoised = self.denoiser(audio, strength=0.01)[:, 0]
-        #torchaudio requires half tensors on the cpu in order to write out the files.
-        audio_denoised = audio_denoised.data.cpu().float()
+    audio_denoised = self.denoiser(audio, strength=0.01)[:, 0]
+    audio_denoised = audio_denoised.data.cpu().float()
 
-        #This needs to trigger a callback to trigger a stream
-        que.put(audio_denoised)
+    que.put(audio_denoised)
 
-        torchaudio.save(filename, audio_denoised, self.hparams.sampling_rate)
-        return filename
+    torchaudio.save(filename, audio_denoised, self.hparams.sampling_rate)
+    return filename
 
 
     def prepare_inference(self, val, que):

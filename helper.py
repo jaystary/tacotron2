@@ -22,12 +22,6 @@ def split_sentences(sentence):
     return que_list
 
 
-def do_something_with_sentences(que):
-
-    que.get()
-
-    return True
-
 
 def example(seconds):
     print('Starting task')

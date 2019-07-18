@@ -7,6 +7,12 @@
     <title>Document</title>
 </head>
 <body>
+
+<form id="my-form">
+    <input type="text" id="sentence" name="sentence" />
+    <button type="submit">Submit</button>
+</form>
+
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
         if (!!window.EventSource) {
@@ -16,6 +22,22 @@
           }
         }
     </script>
+<script>
+$.ajax({
+    url: '/transform:8888',
+    dataType: 'json',
+    type: 'post',
+    contentType: 'application/json',
+    data: JSON.stringify( { "sentence": $('#sentence').val()) } ),
+    processData: false,
+    success: function( data, textStatus, jQxhr ){
+        $('#response pre').html( JSON.stringify( data ) );
+    },
+    error: function( jqXhr, textStatus, errorThrown ){
+        console.log( errorThrown );
+    }
+});
+</script>
 
     <audio controls>
         <source src="{{ url_for('audio') }}" type="audio/x-wav;codec=pcm">

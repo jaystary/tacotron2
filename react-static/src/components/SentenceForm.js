@@ -17,7 +17,7 @@ export const SentenceForm = ({ onNewSentence }) => {
         <Button
           onClick={async () => {
             const value = { sentence };
-            const response = await fetch("/tts_infer", {
+            const response = await fetch("/infer_tts", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"

@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request, render_template, Response
 from flask import send_file
+from flask_cors import CORS
 import queue
 import helper
 # import audio_processing as ap
@@ -15,25 +16,20 @@ import itertools
 # from inference import Inference
 
 CHUNK = 4096
+PORT = 8888
 
 # inference = Inference()
 # inference.load_model()
 
 app = Flask(__name__, template_folder='static')
-
-class Sync():
-    a = False
+CORS(app)
 
 
-sync = Sync()
-
-@app.route('/text', methods=['POST'])
+@app.route('/infer_tts', methods=['POST'])
 def text():
-    print("1")
-    val = request.form['sentence']
-    sentence_list = helper.split_sentences(val)
+    val = request.json['sentence']
 
-    #audio(sentence_list)
+    sentence_list = helper.split_sentences(val)
 
     def generate():
         while True:
@@ -41,12 +37,12 @@ def text():
             sentence_list.task_done()
             time.sleep(1)
 
+
     return Response(generate(), content_type='text/event-stream')
 
 
 @app.route('/audio')
 def audio():
-    print("2")
     p = pyaudio.PyAudio()
     wf = wave.open('sample1.wav', 'rb')
 
@@ -79,8 +75,10 @@ def audio():
 
 @app.route('/')
 def index():
-    return render_template('audio.html')
+    response = flask.jsonify({'some': 'data'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    #return render_template('audio.html')
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8888, debug=True)
+    app.run(host="localhost", port=PORT, debug=True)

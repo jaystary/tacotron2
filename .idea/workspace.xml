@@ -3,34 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ef5d62f1-4166-4c81-bd60-2ef3bff469dd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/audio.html" beforeDir="false" afterPath="$PROJECT_DIR$/static/audio.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/audio/Sample.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/index1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/node_modules/howler/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/node_modules/howler/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/node_modules/howler/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/node_modules/howler/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/node_modules/howler/src/howler.core.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/node_modules/howler/src/plugins/howler.spatial.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/sound.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static_react/src/serviceWorker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-static/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/react-static/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-static/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-static/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react-static/src/components/SentenceForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/react-static/src/components/SentenceForm.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/tacotron2$main.coverage" NAME="main Coverage Results" MODIFIED="1563465051160" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tacotron2$main.coverage" NAME="main Coverage Results" MODIFIED="1563540066354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/tacotron2$main1.coverage" NAME="main1 Coverage Results" MODIFIED="1563457296469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FavoritesManager">
@@ -47,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+            <state relative-caret-position="327">
+              <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -60,31 +36,73 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/tokenize.py">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/flask/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2341">
-              <caret line="446" column="23" lean-forward="true" selection-start-line="446" selection-start-column="23" selection-end-line="446" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/static/audio.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="58" lean-forward="true" selection-start-line="33" selection-start-column="58" selection-end-line="33" selection-end-column="58" />
+            <state relative-caret-position="843">
+              <caret line="2308" selection-start-line="2308" selection-end-line="2308" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model.py">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/werkzeug/debug/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6855">
-              <caret line="457" column="8" selection-start-line="457" selection-start-column="8" selection-end-line="457" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="185">
+              <caret line="329" selection-start-line="329" selection-end-line="329" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/werkzeug/serving.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="325" selection-start-line="325" selection-end-line="325" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/socketserver.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="649" selection-start-line="649" selection-end-line="649" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/threading.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="864" selection-start-line="864" selection-end-line="864" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/http/server.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="425" selection-start-line="425" selection-end-line="425" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/werkzeug/local.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="345" selection-start-line="345" selection-end-line="345" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/audio.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="555">
+              <caret line="37" column="5" lean-forward="true" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -93,7 +111,7 @@
         <entry file="file://$PROJECT_DIR$/helper.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="320">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="e#32#41#0" expanded="true" />
               </folding>
@@ -166,7 +184,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1664" />
+    <option name="x" value="1745" />
     <option name="y" value="69" />
     <option name="width" value="1067" />
     <option name="height" value="1456" />
@@ -296,12 +314,12 @@
       <workItem from="1562714707561" duration="14284000" />
       <workItem from="1562814073590" duration="31756000" />
       <workItem from="1563093705121" duration="63765000" />
-      <workItem from="1563355013454" duration="13216000" />
+      <workItem from="1563355013454" duration="18862000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133473000" />
+    <option name="totallyTimeSpent" value="139119000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -313,24 +331,24 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1664" y="69" width="1067" height="1456" extended-state="0" />
+    <frame x="1745" y="69" width="1067" height="1456" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6130233" visible="true" weight="0.28390244" />
-      <window_info id="Structure" order="1" sideWeight="0.38697675" side_tool="true" visible="true" weight="0.28390244" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6127983" visible="true" weight="0.28390244" />
+      <window_info id="Structure" order="1" sideWeight="0.38720173" side_tool="true" visible="true" weight="0.28390244" />
       <window_info id="Favorites" order="2" sideWeight="0.20404722" side_tool="true" weight="0.30512092" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49658537" weight="0.32991204" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49857754" weight="0.32993197" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.33268294" weight="0.3159824" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.33268294" weight="0.20454545" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49531835" weight="0.32844576" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49928877" weight="0.32879817" />
-      <window_info anchor="bottom" id="File Transfer" order="9" sideWeight="0.35902438" visible="true" weight="0.21187684" />
+      <window_info anchor="bottom" id="File Transfer" order="9" sideWeight="0.35902438" visible="true" weight="0.3240469" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4653558" weight="0.3276644" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4653558" weight="0.32697946" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.6409756" side_tool="true" weight="0.3276644" />
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.32879817" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="14" sideWeight="0.49906367" weight="0.32993197" />
@@ -416,28 +434,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>49</line>
+          <line>45</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="5" />
+          <line>31</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.3/remote_sources/1347882052/1182481732/torchaudio/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.3/remote_sources/1347882052/1182481732/google/protobuf/descriptor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13185">
@@ -594,20 +607,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/socketserver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="649" selection-start-line="649" selection-end-line="649" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/threading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="864" selection-start-line="864" selection-end-line="864" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -639,34 +638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="691">
-          <caret line="2308" selection-start-line="2308" selection-end-line="2308" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/werkzeug/debug/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="329" selection-start-line="329" selection-end-line="329" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/werkzeug/serving.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="360" selection-start-line="360" selection-end-line="360" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/http/server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="425" selection-start-line="425" selection-end-line="425" />
         </state>
       </provider>
     </entry>
@@ -707,7 +678,7 @@
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/tokenize.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2341">
-          <caret line="446" column="23" lean-forward="true" selection-start-line="446" selection-start-column="23" selection-end-line="446" selection-end-column="23" />
+          <caret line="446" column="23" selection-start-line="446" selection-start-column="23" selection-end-line="446" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -765,27 +736,76 @@
     <entry file="file://$PROJECT_DIR$/helper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="e#32#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/static/audio.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="555">
+          <caret line="37" column="5" lean-forward="true" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/audio.html">
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/werkzeug/local.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="58" lean-forward="true" selection-start-line="33" selection-start-column="58" selection-end-line="33" selection-end-column="58" />
+        <state relative-caret-position="353">
+          <caret line="345" selection-start-line="345" selection-end-line="345" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="843">
+          <caret line="2308" selection-start-line="2308" selection-end-line="2308" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/werkzeug/debug/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="329" selection-start-line="329" selection-end-line="329" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/http/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="425" selection-start-line="425" selection-end-line="425" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/site-packages/werkzeug/serving.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="325" selection-start-line="325" selection-end-line="325" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/socketserver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="649" selection-start-line="649" selection-end-line="649" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.7/threading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="864" selection-start-line="864" selection-end-line="864" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="24" column="9" lean-forward="true" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

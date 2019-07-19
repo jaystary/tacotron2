@@ -25,17 +25,20 @@ app = Flask(__name__, template_folder='static')
 CORS(app)
 
 
-@app.route('/infer_tts', methods=['POST'])
+@app.route('/infer_tts', methods=['GET', 'POST'])
 def text():
-    val = request.json['sentence']
+    val = request.json
+    val = val['sentence']
 
     sentence_list = helper.split_sentences(val)
+    print(sentence_list)
 
     def generate():
-        while True:
-            yield "data: %s\n\n" % sentence_list.get()
-            sentence_list.task_done()
-            time.sleep(1)
+        yield flask.jsonify({'some': 'data'})
+        #while True:
+        #    yield "data: %s\n\n" % sentence_list.get()
+        #    sentence_list.task_done()
+        #    time.sleep(1)
 
 
     return Response(generate(), content_type='text/event-stream')

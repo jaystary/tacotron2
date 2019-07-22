@@ -1,7 +1,8 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask import request, render_template, Response
 from flask import send_file
 from flask_cors import CORS
+from flask_socketio import SocketIO, emit, join_room
 import queue
 import helper
 # import audio_processing as ap
@@ -13,6 +14,8 @@ import time
 import asyncio
 import itertools
 
+
+
 # from inference import Inference
 
 CHUNK = 4096
@@ -22,19 +25,40 @@ PORT = 8888
 # inference.load_model()
 
 app = Flask(__name__, template_folder='static')
+app.config['SECRET_KEY'] = 'development key'
+socket = SocketIO(app)
 CORS(app)
+
+
+@socket.on('connect')
+def on_connect():
+    print('user connected')
+    activate_socket()
+
+@socket.on('send_message')
+def on_sent(data):
+    emit('message_sent', data)
+
+def activate_socket():
+    emit('activate_socket', 'Hello')
+
+#@socketio.on('send_message')
+#    def handle_source(json_data):
+#        text = json_data['message'].encode('ascii', 'ignore')
+#        emit('echo', {'echo': 'Server Says: '+text}, broadcast=True, include_self=False)
 
 
 @app.route('/infer_tts', methods=['GET', 'POST'])
 def text():
-    val = request.json
-    val = val['sentence']
+    #val = request.json
+    #val = val['sentence']
 
-    sentence_list = helper.split_sentences(val)
-    print(sentence_list)
+    #sentence_list = helper.split_sentences(val)
+    #print(sentence_list)
 
     def generate():
-        yield flask.jsonify({'some': 'data'})
+
+        yield jsonify({'some': 'data'})
         #while True:
         #    yield "data: %s\n\n" % sentence_list.get()
         #    sentence_list.task_done()
@@ -78,7 +102,6 @@ def audio():
 
 @app.route('/')
 def index():
-    response = flask.jsonify({'some': 'data'})
     response.headers.add('Access-Control-Allow-Origin', '*')
     #return render_template('audio.html')
 

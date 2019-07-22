@@ -28,12 +28,8 @@ export const SentenceForm = ({ onNewSentence }) => {
               },
               body: JSON.stringify(value)
             });
-            console.log(sentence)
-            var evtSource = new EventSource("/infer_tts");
-            evtSource.onmessage = function(e) {
-            var obj = JSON.stringify(e.data);
-            console.log(obj)
-            }
+
+        
 
 
           }}

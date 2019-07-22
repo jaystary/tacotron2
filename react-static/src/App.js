@@ -1,40 +1,82 @@
-import React, { useEffect, useState } from "react";
+import React, { Component } from 'react'
 import "./App.css";
-import { Text_Responses } from "./components/Text";
-import { SentenceForm } from "./components/SentenceForm";
 import { Container, Grid } from "semantic-ui-react";
-import Player from "./components/PlayerComponent";
+import MessageWindow from './components/MessageWindow'
+import io from 'socket.io-client'
 
-function App() {
-  const [text_responses, setText] = useState([]);
+const socket = io('http://localhost:8888')
 
-  useEffect(() => {
-    fetch("/tts_response").then(response =>
-      response.json().then(data => {
-        setText(data.text_responses);
-      })
-    );
-  }, []);
+class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      sentence: '',
+      id: '',
+      messages: []
+    }
+    this.handleChange = this.handleChange.bind(this)
+    
+  }
 
-  return (
-    <Container style={{ marginTop: 40 }}>
-      <Grid>
-        <Grid.Column width={8}>
-          <SentenceForm
-            onNewText_Response={text_response =>
-              setText(currentText => [text_response, ...currentText])
-            }
-          />
-        </Grid.Column>
-        <Grid.Column width={8}>
-          <h1>Text</h1>
-          <Text_Responses text_responses={text_responses} />
-        </Grid.Column>
+  handleChange (event) {
+    const {name, value} = event.target
+    this.setState({ [name]: value })
+  }
 
-        <Player />
-      </Grid>
-    </Container>
-  );
+  sendMessage (message, id) {
+    socket.emit(
+      'send_message',
+      {
+        id: id,
+        body: message,
+        timeStamp: Date.now()
+      }
+    )
+  }
+
+  setSocketListeners () {
+    socket.on('message', (data) => {
+      console.log(data.message)
+    })
+  
+    socket.on('message_sent', (message) => {
+      this.setState({ messages: [...this.state.messages, message] }, () => {
+        window.localStorage.setItem('messages', JSON.stringify(this.state.messages))
+        })
+    })
+    
+    socket.on('activate_socket', (sentence) => {
+      console.log(sentence)
+      //if (this.state.username) {
+      //  socket.emit('activate_user', { username: this.state.username })
+      //}
+    })
+  }
+
+  loadMessages () {
+    const savedMessages = window.localStorage.getItem('messages')
+    if (savedMessages) {
+      this.setState({ messages: JSON.parse(savedMessages) || [] })
+    }
+  }
+
+    componentDidMount () {
+      this.loadMessages()
+      this.setSocketListeners()
+    }
+
+    render () {
+      const {messages} = this.state
+  
+      return (
+        <div className='App'>
+         <MessageWindow
+          messages={messages}
+          sendMessage={this.sendMessage} />
+        </div>
+        )
+    }
+
 }
 
 export default App;

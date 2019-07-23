@@ -86,7 +86,6 @@ class Player extends Component {
 
     return (
       <section className="section">
-        <h1>Demo</h1>
         <div className="player-wrapper">
           <ReactPlayer
             ref={this.ref}
@@ -103,8 +102,8 @@ class Player extends Component {
             onProgress={this.onProgress}
           />
         </div>
-        <table>
-          <tbody>
+        <table style={{ color: "white" }}>
+          <tbody align="left">
             <tr>
               <th>Controls</th>
               <td>

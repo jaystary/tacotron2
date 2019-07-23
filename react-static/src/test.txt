@@ -1,0 +1,4 @@
+Good morning
+how are you
+this is a truncatechars_htm
+we are mocking data

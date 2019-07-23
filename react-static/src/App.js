@@ -1,82 +1,89 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import "./App.css";
 import { Container, Grid } from "semantic-ui-react";
-import MessageWindow from './components/MessageWindow'
-import io from 'socket.io-client'
+import MessageWindow from "./components/MessageWindow";
+import io from "socket.io-client";
 
-const socket = io('http://localhost:8888')
+const socket = io("http://localhost:8888");
 
 class App extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      sentence: '',
-      id: '',
+      sentence: "",
+      id: "",
       messages: []
-    }
-    this.handleChange = this.handleChange.bind(this)
-    
+    };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange (event) {
-    const {name, value} = event.target
-    this.setState({ [name]: value })
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
-  sendMessage (message, id) {
-    socket.emit(
-      'send_message',
-      {
-        id: id,
-        body: message,
-        timeStamp: Date.now()
-      }
-    )
+  sendMessage(message, id) {
+    socket.emit("send_message", {
+      id: id,
+      body: message,
+      timeStamp: Date.now()
+    });
   }
 
-  setSocketListeners () {
-    socket.on('message', (data) => {
-      console.log(data.message)
-    })
-  
-    socket.on('message_sent', (message) => {
+  setSocketListeners() {
+    socket.on("message", data => {
+      console.log(data.message);
+    });
+
+    socket.on("message_sent", message => {
       this.setState({ messages: [...this.state.messages, message] }, () => {
-        window.localStorage.setItem('messages', JSON.stringify(this.state.messages))
-        })
-    })
-    
-    socket.on('activate_socket', (sentence) => {
-      console.log(sentence)
+        window.localStorage.setItem(
+          "messages",
+          JSON.stringify(this.state.messages)
+        );
+      });
+    });
+
+    socket.on("activate_socket", sentence => {
+      console.log(sentence);
       //if (this.state.username) {
       //  socket.emit('activate_user', { username: this.state.username })
       //}
-    })
+    });
   }
 
-  loadMessages () {
-    const savedMessages = window.localStorage.getItem('messages')
+  loadMessages() {
+    const savedMessages = window.localStorage.getItem("messages");
     if (savedMessages) {
-      this.setState({ messages: JSON.parse(savedMessages) || [] })
+      this.setState({ messages: JSON.parse(savedMessages) || [] });
     }
   }
 
-    componentDidMount () {
-      this.loadMessages()
-      this.setSocketListeners()
-    }
+  componentDidMount() {
+    this.loadMessages();
+    this.setSocketListeners();
+  }
 
-    render () {
-      const {messages} = this.state
-  
-      return (
-        <div className='App'>
-         <MessageWindow
-          messages={messages}
-          sendMessage={this.sendMessage} />
+  render() {
+    return (
+      <div className="App">
+        <div>
+          <MessageWindow />
         </div>
-        )
-    }
+      </div>
+    );
+  }
+  /*
+  render() {
+    const { messages } = this.state;
 
+    return (
+      <div className="App">
+        <MessageWindow messages={messages} sendMessage={this.sendMessage} />
+      </div>
+    );
+  }*/
 }
 
 export default App;

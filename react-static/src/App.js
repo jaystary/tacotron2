@@ -11,11 +11,13 @@ class App extends Component {
     this.state = {
       sentence: "",
       id: "",
-      messages: []
-    };
+      messages: [],
+      };
 
     this.handleChange = this.handleChange.bind(this);
+    this.messagewindowElement = React.createRef();
   }
+  
 
   handleChange(event) {
     const { name, value } = event.target;
@@ -45,12 +47,14 @@ class App extends Component {
     });
 
     socket.on("activate_socket", sentence => {
-      console.log(sentence);
+      this.messagewindowElement.current.addMessage("Hello");
+      console.log("connected");
       //if (this.state.username) {
       //  socket.emit('activate_user', { username: this.state.username })
       //}
     });
   }
+
 
   loadMessages() {
     const savedMessages = window.localStorage.getItem("messages");
@@ -62,14 +66,14 @@ class App extends Component {
   componentDidMount() {
     this.loadMessages();
     this.setSocketListeners();
+   
   }
 
   render() {
     return (
       <div className="App">
-        <div className="window">
-          <MessageWindow />
-        </div>
+        <MessageWindow ref={this.messagewindowElement} />
+       
       </div>
     );
   }

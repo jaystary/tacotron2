@@ -13,35 +13,14 @@ import {
   scrollSpy
 } from "react-scroll";
 
-const URL = "ws://localhost:3030";
-
 class MessageWindow extends Component {
   state = {
     messages: []
   };
 
-  ws = new WebSocket(URL);
 
   componentDidMount() {
-    this.ws.onopen = () => {
-      // on connecting, do nothing but log it to the console
-      console.log("connected");
-    };
-
-    this.ws.onmessage = evt => {
-      // on receiving a message, add it to the list of messages
-      const message = JSON.parse(evt.data);
-      this.addMessage(message);
-    };
-
-    this.ws.onclose = () => {
-      console.log("disconnected");
-      // automatically try to reconnect on connection loss
-      this.setState({
-        ws: new WebSocket(URL)
-      });
-    };
-
+ 
     Events.scrollEvent.register("begin", function(to, element) {
       console.log("begin", arguments);
     });
@@ -52,6 +31,8 @@ class MessageWindow extends Component {
 
     scrollSpy.update();
   }
+
+
 
   componentDidUpdate() {
     this.scrollToBottom();
@@ -65,15 +46,19 @@ class MessageWindow extends Component {
     });
   };
 
-  addMessage = message =>
-    this.setState(state => ({ messages: [...state.messages, message] }));
+  addMessage = (messageIn) => {
+   this.setState(state => ({ messages: [...state.messages, messageIn] }));
+    };
+  //addMessage = message =>
+  //  this.setState(state => ({ messages: [...state.messages, message] }));
 
   submitMessage = messageString => {
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
     const message = { name: this.state.name, message: messageString };
-    this.ws.send(JSON.stringify(message));
-    this.addMessage(message);
+    //this.ws.send(JSON.stringify(message));
+    //this.addMessage(message);
   };
+
 
   render() {
     return (
@@ -133,36 +118,3 @@ const TextMessageStyle = { background: "#a4d7e1", borderRadius: "4px" };
 
 export default MessageWindow;
 
-/*
-class MessageWindow extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  filterMessages(messages) {
-    return messages;
-  }
-
-  render() {
-    const { sendMessage, messages } = this.props;
-    return (
-      <div>
-        <MessageComponent messages={messages} sendMessage={sendMessage} />
-      </div>
-    );
-  }
-}
-
-MessageWindow.propTypes = {
-  sendMessage: propTypes.func,
-  messages: propTypes.arrayOf(
-    propTypes.shape({
-      author: propTypes.string,
-      body: propTypes.string,
-      timestamp: propTypes.instanceOf(Date)
-    })
-  )
-};
-
-export default MessageWindow;
-*/

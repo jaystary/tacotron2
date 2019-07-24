@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Container, Grid } from "semantic-ui-react";
 import MessageWindow from "./components/MessageWindow";
 import io from "socket.io-client";
 
@@ -68,7 +67,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div>
+        <div className="window">
           <MessageWindow />
         </div>
       </div>

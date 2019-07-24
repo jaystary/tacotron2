@@ -1,9 +1,37 @@
 .App {
-  text-align: right;
-  background-color: #282c34;
+  background-color: black;
 }
 
-@keyframes App-logo-spin {
+.window {
+  color: blue;
+  text-align: right;
+}
+
+.playerStyle input[type="range"] {
+  -webkit-appearance: none;
+  width: 55%;
+  border-radius: 8px;
+  height: 7px;
+  border: 1px solid #bdc3c7;
+  background-color: #fff;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: #5dade2;
+  border: 1px solid #bdc3c7;
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+th {
+  padding-left: 25px;
+}
+
+slider-thumb @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }

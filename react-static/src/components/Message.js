@@ -1,4 +1,5 @@
 import React from "react";
+import { brotliDecompress } from "zlib";
 // import propTypes from "prop-types";
 
 class Message extends React.Component {
@@ -10,9 +11,15 @@ class Message extends React.Component {
   }
 
   render() {
-    return <div>{this.props.message}</div>;
+    return <div style={messageStyle}>{this.props.message}</div>;
   }
 }
+
+const messageStyle = {
+  textAlign: "left",
+  margin: "10px",
+  fontWeight: "bold"
+};
 
 export default Message;
 

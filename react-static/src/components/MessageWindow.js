@@ -77,9 +77,9 @@ class MessageWindow extends Component {
 
   render() {
     return (
-      <Container style={{ minHeight: "100vh" }}>
+      <Container style={ContainerStyle}>
         <Grid>
-          <Grid.Row style={{ marginTop: 40 }}>
+          <Grid.Row style={GridStylePart1}>
             <Grid.Column>
               <SendMessageForm
                 onSubmitMessage={messageString =>
@@ -88,12 +88,11 @@ class MessageWindow extends Component {
               />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row style={{ minHeight: 80 }} />
-          <Grid.Row columns={2}>
+          <Grid.Row style={GridStylePart2} columns={2}>
             <Grid.Column>
               <Player />
             </Grid.Column>
-            <Grid.Column style={{ background: "#C0C0C0" }}>
+            <Grid.Column style={TextMessageStyle}>
               <div>
                 <Element
                   name="TextElement"
@@ -126,6 +125,11 @@ class MessageWindow extends Component {
     // );
   }
 }
+
+const ContainerStyle = { minHeight: "100vh" };
+const GridStylePart1 = { marginTop: 40 };
+const GridStylePart2 = { marginTop: 80 };
+const TextMessageStyle = { background: "#a4d7e1", borderRadius: "4px" };
 
 export default MessageWindow;
 

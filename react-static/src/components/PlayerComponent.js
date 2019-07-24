@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from "semantic-ui-react";
+import { Table, Button } from "semantic-ui-react";
 import ReactPlayer from "react-player";
 
 class Player extends Component {
@@ -67,7 +67,11 @@ class Player extends Component {
   };
 
   renderLoadButton = (url, label) => {
-    return <Button onClick={() => this.load(url)}>{label}</Button>;
+    return (
+      <Button style={otherBtn} onClick={() => this.load(url)}>
+        {label}
+      </Button>
+    );
   };
 
   ref = player => {
@@ -85,8 +89,8 @@ class Player extends Component {
     } = this.state;
 
     return (
-      <section className="section">
-        <div className="player-wrapper">
+      <section>
+        <div>
           <ReactPlayer
             ref={this.ref}
             className="react-player"
@@ -102,116 +106,160 @@ class Player extends Component {
             onProgress={this.onProgress}
           />
         </div>
-        <table style={{ color: "white" }}>
-          <tbody align="left">
-            <tr>
-              <th>Controls</th>
-              <td>
-                <Button onClick={this.stop}>Stop</Button>
-                {"   "}
-                <Button onClick={this.playPause}>
-                  {playing ? "Pause" : "Play"}
-                </Button>
-              </td>
-            </tr>
-            <tr>
-              <th>Speed</th>
-              <td>
-                <Button onClick={this.setPlaybackRate} value={1}>
-                  1x
-                </Button>{" "}
-                <Button onClick={this.setPlaybackRate} value={1.5}>
-                  1.5x
-                </Button>{" "}
-                <Button onClick={this.setPlaybackRate} value={2}>
-                  2x
-                </Button>{" "}
-              </td>
-            </tr>
-            <tr>
-              <th>Seek</th>
-              <td>
-                <input
-                  type="range"
-                  min={0}
-                  max={1}
-                  step="any"
-                  value={played}
-                  onMouseDown={this.onSeekMouseDown}
-                  onChange={this.onSeekChange}
-                  onMouseUp={this.onSeekMouseUp}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Volume</th>
-              <td>
-                <input
-                  type="range"
-                  min={0}
-                  max={1}
-                  step="any"
-                  value={volume}
-                  onChange={this.setVolume}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <label htmlFor="muted">Muted</label>
-              </th>
-              <td>
-                <input
-                  id="muted"
-                  type="checkbox"
-                  checked={muted}
-                  onChange={this.toggleMuted}
-                />
-              </td>
-            </tr>
-            <tr>
-              <th>Played</th>
-              <td>
-                <progress max={1} value={played} />
-              </td>
-            </tr>
-            <tr>
-              <th>Loaded</th>
-              <td>
-                <progress max={1} value={loaded} />
-              </td>
-            </tr>
-            <tr>
-              <th>Files</th>
-              <td>
-                {this.renderLoadButton(
-                  "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                  "mp3"
-                )}
-              </td>
-            </tr>
-            <tr>
-              <th>Custom URL</th>
-              <td>
-                <input
-                  ref={input => {
-                    this.urlInput = input;
-                  }}
-                  type="text"
-                  placeholder="Enter URL"
-                />{" "}
-                <Button
-                  onClick={() => this.setState({ url: this.urlInput.value })}
-                >
-                  Load
-                </Button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="playerStyle">
+          <Table style={TableStyle}>
+            <tbody>
+              <tr>
+                <th>Controls</th>
+                <td>
+                  <Button style={ControlsBtn} onClick={this.stop}>
+                    Stop
+                  </Button>
+                  {"   "}
+                  <Button style={ControlsBtn} onClick={this.playPause}>
+                    {playing ? "Pause" : "Play"}
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <th>Speed</th>
+                <td>
+                  <Button
+                    style={SpeedBtn}
+                    onClick={this.setPlaybackRate}
+                    value={1}
+                  >
+                    1x
+                  </Button>{" "}
+                  <Button
+                    style={SpeedBtn}
+                    onClick={this.setPlaybackRate}
+                    value={1.5}
+                  >
+                    1.5x
+                  </Button>{" "}
+                  <Button
+                    style={SpeedBtn}
+                    onClick={this.setPlaybackRate}
+                    value={2}
+                  >
+                    2x
+                  </Button>{" "}
+                </td>
+              </tr>
+              <tr>
+                <th>Seek</th>
+                <td>
+                  <input
+                    type="range"
+                    min={0}
+                    max={1}
+                    step="any"
+                    value={played}
+                    onMouseDown={this.onSeekMouseDown}
+                    onChange={this.onSeekChange}
+                    onMouseUp={this.onSeekMouseUp}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Volume</th>
+                <td>
+                  <input
+                    type="range"
+                    min={0}
+                    max={1}
+                    step="any"
+                    value={volume}
+                    onChange={this.setVolume}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  <label htmlFor="muted">Muted</label>
+                </th>
+                <td>
+                  <input
+                    id="muted"
+                    type="checkbox"
+                    checked={muted}
+                    onChange={this.toggleMuted}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Played</th>
+                <td>
+                  <progress max={1} value={played} />
+                </td>
+              </tr>
+              <tr>
+                <th>Loaded</th>
+                <td>
+                  <progress max={100} percent={loaded} value={loaded} />
+                </td>
+              </tr>
+              <tr>
+                <th>Files</th>
+                <td>
+                  {this.renderLoadButton(
+                    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                    "mp3"
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <th>Custom URL</th>
+                <td>
+                  <input
+                    ref={input => {
+                      this.urlInput = input;
+                    }}
+                    type="text"
+                    placeholder="Enter URL"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th />
+                <td>
+                  <Button
+                    style={otherBtn}
+                    onClick={() => this.setState({ url: this.urlInput.value })}
+                  >
+                    Load
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </div>
       </section>
     );
   }
 }
+
+const TableStyle = { background: "#a4d7e1", color: "#204969" };
+const ControlsBtn = {
+  width: "70px",
+  textAlign: "center",
+  padding: "8px",
+  color: "#204969"
+};
+
+const SpeedBtn = {
+  width: "45px",
+  textAlign: "center",
+  padding: "10px",
+  color: "#204969"
+};
+
+const otherBtn = {
+  width: "50px",
+  textAlign: "center",
+  padding: "8px",
+  color: "#204969"
+};
 
 export default Player;

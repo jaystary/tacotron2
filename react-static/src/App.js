@@ -47,7 +47,7 @@ class App extends Component {
     });
 
     socket.on("activate_socket", sentence => {
-      this.messagewindowElement.current.addMessage("Hello");
+      
       console.log("connected");
       //if (this.state.username) {
       //  socket.emit('activate_user', { username: this.state.username })
@@ -66,6 +66,7 @@ class App extends Component {
   componentDidMount() {
     this.loadMessages();
     this.setSocketListeners();
+    this.messagewindowElement.current.addMessage("Hello");
    
   }
 

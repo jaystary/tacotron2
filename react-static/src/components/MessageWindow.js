@@ -46,8 +46,10 @@ class MessageWindow extends Component {
     });
   };
 
-  addMessage = (messageIn) => {
-   this.setState(state => ({ messages: [...state.messages, messageIn] }));
+  addMessage = (message) => {
+    console.log(message)
+   this.setState(state => ({ messages: [...state.messages, message] }));
+   console.log(this.state.messages)
     };
   //addMessage = message =>
   //  this.setState(state => ({ messages: [...state.messages, message] }));

@@ -18,7 +18,7 @@ class SendMessageForm extends Component {
         >
           <Form.Field>
             <TextArea
-              rows="15"
+              rows="20"
               placeholder={"Enter your sentences..."}
               value={this.state.message}
               onChange={e => this.setState({ message: e.target.value })}

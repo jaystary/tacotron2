@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask import request, render_template, Response
 from flask import send_file
 from flask_cors import CORS
-from flask_socketio import SocketIO, emit, join_room
+from flask_socketio import SocketIO, emit
 import queue
 import helper
 # import audio_processing as ap
@@ -26,26 +26,37 @@ PORT = 8888
 
 app = Flask(__name__, template_folder='static')
 app.config['SECRET_KEY'] = 'development key'
-socket = SocketIO(app)
+socketio = SocketIO(app)
+
 CORS(app)
 
+@socketio.on('connect')
+def connected():
+    emit('echo', {'echo': 'Server Says: '+text}, broadcast=True, include_self=False)
+    print("connected")
 
-@socket.on('connect')
-def on_connect():
-    print('user connected')
-    activate_socket()
 
-@socket.on('send_message')
-def on_sent(data):
-    emit('message_sent', data)
+@socketio.on('disconnect')
+def disconnect():
+    print("disconnected")
 
-def activate_socket():
-    emit('activate_socket', 'Hello')
+@socketio.on('get_data')
+def get_data(data):
+    print(data)
+    emit('get_data', {'data': 'Connected'})
+
+
+
+
 
 #@socketio.on('send_message')
 #    def handle_source(json_data):
 #        text = json_data['message'].encode('ascii', 'ignore')
 #        emit('echo', {'echo': 'Server Says: '+text}, broadcast=True, include_self=False)
+
+
+#def process_text(message):
+
 
 
 @app.route('/infer_tts', methods=['GET', 'POST'])
@@ -55,6 +66,8 @@ def text():
 
     #sentence_list = helper.split_sentences(val)
     #print(sentence_list)
+
+
 
     def generate():
 
@@ -107,4 +120,5 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=PORT, debug=True)
+    #app.run(host="localhost", port=PORT, debug=True)
+    socketio.run(app, debug=True, port=8888)

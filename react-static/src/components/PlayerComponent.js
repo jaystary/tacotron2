@@ -3,6 +3,29 @@ import { Table, Button } from "semantic-ui-react";
 import ReactPlayer from "react-player";
 
 class Player extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    return (
+      <ReactPlayer
+        url="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+        controls
+        loop={true}
+        volume={0.8}
+        marginLeft="20px"
+        width="800px"
+        height="50px"
+      />
+    );
+  }
+}
+
+export default Player;
+
+/*
+class Player extends Component {
   state = {
     url: null,
     playing: true,
@@ -263,3 +286,4 @@ const otherBtn = {
 };
 
 export default Player;
+*/

@@ -19,9 +19,7 @@ class MessageWindow extends Component {
     message: ""
   };
 
-
   componentDidMount() {
- 
     Events.scrollEvent.register("begin", function(to, element) {
       console.log("begin", arguments);
     });
@@ -32,8 +30,6 @@ class MessageWindow extends Component {
 
     scrollSpy.update();
   }
-
-
 
   componentDidUpdate() {
     this.scrollToBottom();
@@ -47,18 +43,16 @@ class MessageWindow extends Component {
     });
   };
 
-
   submitMessage = messageString => {
-   const message = { name: this.state.name, message: messageString };
-  this.setState(state => ({ messages: [...state.messages, message] }));
+    const message = { name: this.state.name, message: messageString };
+    this.setState(state => ({ messages: [...state.messages, message] }));
   };
-
 
   render() {
     return (
       <Container style={ContainerStyle}>
         <Grid>
-          <Grid.Row style={GridStylePart1}>
+          <Grid.Row style={InptutStyle}>
             <Grid.Column>
               <SendMessageForm
                 onSubmitMessage={messageString =>
@@ -67,28 +61,22 @@ class MessageWindow extends Component {
               />
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row style={GridStylePart2} columns={2}>
-            <Grid.Column>
-              <Player />
-            </Grid.Column>
+          <Grid.Row>
             <Grid.Column style={TextMessageStyle}>
-              <div>
-                <Element
-                  name="TextElement"
-                  className="element"
-                  id="TextElement"
-                  style={{
-                    position: "relative",
-                    height: "450px",
-                    overflow: "auto"
-                  }}
-                >
-                  {this.state.messages.map((message, index) => (
-                    <Message key={index} message={message.message} />
-                  ))}
-                </Element>
-              </div>
+              <Element
+                name="TextElement"
+                className="element"
+                id="TextElement"
+                style={ElementStyle}
+              >
+                {this.state.messages.map((message, index) => (
+                  <Message key={index} message={message.message} />
+                ))}
+              </Element>
             </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Player />
           </Grid.Row>
         </Grid>
       </Container>
@@ -106,9 +94,17 @@ class MessageWindow extends Component {
 }
 
 const ContainerStyle = { minHeight: "100vh" };
-const GridStylePart1 = { marginTop: 40 };
-const GridStylePart2 = { marginTop: 80 };
-const TextMessageStyle = { background: "#a4d7e1", borderRadius: "4px" };
+const InptutStyle = { marginTop: 40 };
+const TextMessageStyle = {
+  marginLeft: "10px",
+  marginRight: "10px",
+  background: "#93b5b3",
+  borderRadius: "4px"
+};
+const ElementStyle = {
+  position: "relative",
+  height: "350px",
+  overflow: "auto"
+};
 
 export default MessageWindow;
-

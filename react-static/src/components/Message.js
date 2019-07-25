@@ -1,5 +1,4 @@
 import React from "react";
-import { brotliDecompress } from "zlib";
 // import propTypes from "prop-types";
 
 class Message extends React.Component {

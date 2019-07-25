@@ -66,15 +66,16 @@ class App extends Component {
   componentDidMount() {
     this.loadMessages();
     this.setSocketListeners();
-    this.messagewindowElement.current.addMessage("Hello");
-   
+    
+    this.messagewindowElement.current.submitMessage("Hello");
   }
+
+
 
   render() {
     return (
       <div className="App">
         <MessageWindow ref={this.messagewindowElement} />
-       
       </div>
     );
   }

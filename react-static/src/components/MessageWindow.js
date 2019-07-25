@@ -15,7 +15,8 @@ import {
 
 class MessageWindow extends Component {
   state = {
-    messages: []
+    messages: [],
+    message: ""
   };
 
 
@@ -46,19 +47,10 @@ class MessageWindow extends Component {
     });
   };
 
-  addMessage = (message) => {
-    console.log(message)
-   this.setState(state => ({ messages: [...state.messages, message] }));
-   console.log(this.state.messages)
-    };
-  //addMessage = message =>
-  //  this.setState(state => ({ messages: [...state.messages, message] }));
 
   submitMessage = messageString => {
-    // on submitting the ChatInput form, send the message, add it to the list and reset the input
-    const message = { name: this.state.name, message: messageString };
-    //this.ws.send(JSON.stringify(message));
-    //this.addMessage(message);
+   const message = { name: this.state.name, message: messageString };
+  this.setState(state => ({ messages: [...state.messages, message] }));
   };
 
 

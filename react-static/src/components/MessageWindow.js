@@ -20,6 +20,8 @@ class MessageWindow extends Component {
   };
 
   componentDidMount() {
+
+    //socket.on("get_data", this.getData);
     Events.scrollEvent.register("begin", function(to, element) {
       console.log("begin", arguments);
     });
@@ -35,6 +37,10 @@ class MessageWindow extends Component {
     this.scrollToBottom();
   }
 
+  componentWillUnmount() {
+   // socket.off("get_data");
+  }
+
   scrollToBottom = () => {
     scroll.scrollToBottom({
       containerId: "TextElement",
@@ -43,9 +49,15 @@ class MessageWindow extends Component {
     });
   };
 
+  getData = response => {
+    console.log(response);
+    //const message = { name: this.state.name, message: messageString };
+    //this.setState(state => ({ messages: [...state.messages, message] }));
+    //this.setState({ food_data: foodItems });
+  };
+
   submitMessage = messageString => {
-    const message = { name: this.state.name, message: messageString };
-    this.setState(state => ({ messages: [...state.messages, message] }));
+    //socket.emit("get_data", messageString);
   };
 
   render() {

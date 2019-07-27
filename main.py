@@ -1,8 +1,12 @@
-from flask import Flask, jsonify
+#from gevent import monkey
+#monkey.patch_all()
+
+from flask import Flask, jsonify, json
 from flask import request, render_template, Response
 from flask import send_file
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
+
 import queue
 import helper
 # import audio_processing as ap
@@ -27,23 +31,46 @@ PORT = 8888
 app = Flask(__name__, template_folder='static')
 app.config['SECRET_KEY'] = 'development key'
 socketio = SocketIO(app)
-
+socketio.start_background_task(app)
 CORS(app)
 
 @socketio.on('connect')
 def connected():
-    emit('echo', {'echo': 'Server Says: '+text}, broadcast=True, include_self=False)
-    print("connected")
+    print("connecting")
+    print(request.sid)
+    data = {'request_id': request.sid,
+            'timestamp': int(time.time())}
+    json_data = json.dumps(data)
+    emit('echo', {'data': json_data}, broadcast=False, include_self=True)
 
 
 @socketio.on('disconnect')
 def disconnect():
-    print("disconnected")
+    print("disconnecting")
+    data = {'request_id': request.sid,
+            'timestamp': int(time.time())}
 
-@socketio.on('get_data')
-def get_data(data):
-    print(data)
-    emit('get_data', {'data': 'Connected'})
+
+@socketio.on('getdata', namespace='/audiostream')
+def getdata(data):
+
+    #Chop up sentences and send back clustered data
+    count = 0
+    sentence_list = helper.split_sentences(data)
+    for sentence in sentence_list:
+
+        data = {'request_id': request.sid,
+                'timestamp': int(time.time()),
+                'sentence': sentence,
+                'audio_id': count,
+                'job_id': }
+        json_data = json.dumps(data)
+        emit('getdata', {'data': json_data}, broadcast=False, include_self=True)
+        count += 1
+        socketio.sleep(0)
+
+    #Merge all files into 1 and then send this file when its required again
+    #Write first sentence to DB and store properties of file
 
 
 
@@ -81,7 +108,7 @@ def text():
     return Response(generate(), content_type='text/event-stream')
 
 
-@app.route('/audio')
+@app.route('/audiox')
 def audio():
     p = pyaudio.PyAudio()
     wf = wave.open('sample1.wav', 'rb')

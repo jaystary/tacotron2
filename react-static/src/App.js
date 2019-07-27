@@ -13,8 +13,6 @@ class App extends Component {
       messages: [],
       };
 
-    //this.handleChange = this.handleChange.bind(this);
-    //this.sendMessage = this.sendMessage.bind(this);
     this.messagewindowElement = React.createRef();
   }
   
@@ -77,29 +75,37 @@ class App extends Component {
       this.setState({ messages: JSON.parse(savedMessages) || [] });
     }
   }
-*/
+  */
 
-  getData = response => {
-    console.log(response);
+  getData = resp => {
+    console.log(resp);
     //this.setState({ food_data: foodItems });
   };
 
+
+  echoResponse = resp => {
+    console.log(resp)
+  };
+
   doSomething(){
-    socket.emit("get_data", "Hello");
+    socket.emit("getdata", "Hello World.");
   }
   
 
   componentDidMount() {
     //this.loadMessages();
     //this.setSocketListeners();
-    //this.messagewindowElement.current.submitMessage("Hello");
-    socket.emit("initial_data");
-    socket.on("get_data", this.getData);
+    //this.messagewindowElement.current.submitMessage("Hello")
+   
+    socket.on("getdata", this.getData);
+    socket.on("echo", this.echoResponse);
+    socket.emit("echo");
 
   }
 
   componentWillUnmount() {
-    socket.off("get_data");
+    socket.off("getdata");
+    socket.off("echo");
   }
 
 
@@ -113,9 +119,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <Header />
+      < Header/>
         <MessageWindow ref={this.messagewindowElement} />
-
         <form onSubmit={this.handleOnSubmit}>
         <button type="submit">Inside Custom</button>
       </form>
@@ -123,16 +128,6 @@ class App extends Component {
       </div>
     );
   }
-  /*
-  render() {
-    const { messages } = this.state;
-
-    return (
-      <div className="App">
-        <MessageWindow messages={messages} sendMessage={this.sendMessage} />
-      </div>
-    );
-  }*/
 }
 
 export default App;

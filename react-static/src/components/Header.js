@@ -13,12 +13,9 @@ class Header extends Component {
   }
 
   render() {
-    return (
-      <div className="Header">
-     
-      </div>
-    );
+    return null
   }
+
 }
 
-export { Header, socket };
+export { socket, Header };

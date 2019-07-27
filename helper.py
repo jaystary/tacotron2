@@ -7,7 +7,7 @@ import queue
 import asyncio
 
 def split_sentences(sentence):
-    que_list = queue.Queue()
+    que_list = []
     sentence.replace('....', '.').replace('...', '.').replace('..', '.')
     ends = ['.', '!', '?']
     split_sentence = re.split(r'[\.\!\?]', sentence)
@@ -17,7 +17,7 @@ def split_sentences(sentence):
             contains_delimiter = checkEnds(val, ends)
             if not contains_delimiter:
                 val += '.'
-            que_list.put(val)
+            que_list.append(val)
 
     return que_list
 

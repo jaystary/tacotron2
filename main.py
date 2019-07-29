@@ -6,6 +6,8 @@ from flask import request, render_template, Response
 from flask import send_file
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
+import psycopg2
+from dbconn import db_conn
 
 import queue
 import helper
@@ -17,6 +19,7 @@ import io
 import time
 import asyncio
 import itertools
+import log
 
 
 
@@ -33,6 +36,13 @@ app.config['SECRET_KEY'] = 'development key'
 socketio = SocketIO(app)
 socketio.start_background_task(app)
 CORS(app)
+
+conn = None
+cursor = None
+
+logger = log.setup_custom_logger('root')
+
+
 
 @socketio.on('connect')
 def connected():
@@ -145,7 +155,13 @@ def index():
     response.headers.add('Access-Control-Allow-Origin', '*')
     #return render_template('audio.html')
 
+def main():
+    global conn
+    global cursor
+    conn, cursor = connect_db()
+
 
 if __name__ == "__main__":
     #app.run(host="localhost", port=PORT, debug=True)
     socketio.run(app, debug=True, port=8888)
+    main()

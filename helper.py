@@ -5,6 +5,7 @@ import datetime
 import time
 import queue
 import asyncio
+import logging
 
 def split_sentences(sentence):
     que_list = []
@@ -57,6 +58,8 @@ def checkEnds(line, ends):
 
 def calculate_position_percent(cur, total):
     return (cur / total)*100
+
+
 
 
 

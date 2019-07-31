@@ -52,14 +52,14 @@ def perform_query(user_name, data=None):
     return records
 
 
-def perform_query_jobs(user_name, data=None):
+def perform_query_jobs(user_uid, data=None):
     records = None
-    sql = "select uid from tschema.users where user_name = %s"
+    sql = "select uid, created, headline, agg_duration  from tschema.jobs where user_uid = %s order by created desc"
     with get_cursor("read") as cursor:
         try:
             sql = cursor.mogrify(sql, (user_name,))
             cursor.execute(sql, data)
-            records = cursor.fetchone()
+            records = cursor.fetchall()
         except Exception as e:
             logger.error("Registration failed", e)
     return records

@@ -13,6 +13,7 @@ from audio_processing import griffin_lim
 from train import load_model
 from text import text_to_sequence
 from waveglow.denoiser import Denoiser
+from mutagen.mp3 import MP3
 
 
 class Inference:
@@ -66,6 +67,8 @@ class Inference:
 
         try:
             torchaudio.save(filename, audio_denoised, self.hparams.sampling_rate)
+            audio = MP3(filename)
+            return audio.info.length
         except Exception as e:
             logger.error("Inference failed", e)
 

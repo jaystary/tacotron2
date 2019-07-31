@@ -1,10 +1,8 @@
-#from pydub import AudioSegment
+from pydub import AudioSegment
 import re
 import random
 import datetime
 import time
-import queue
-import asyncio
 import logging
 
 def split_sentences(sentence):
@@ -22,35 +20,21 @@ def split_sentences(sentence):
 
     return que_list
 
-def get_unique_filename():
-    return "";
+def merge_wav(agg_list, new_file_name):
 
-def example(seconds):
-    print('Starting task')
-    for i in range(seconds):
-        print(i)
-        time.sleep(1)
-    print('Task completed')
+    audio_list = []
+    combined = AudioSegment.empty()
 
+    for f in agg_list:
+        audio_list.append(AudioSegment.from_mp3(f.filename))
 
-def merge_wav(filename_list):
+    for w in audio_list:
+        combined += w
 
-    now = datetime.now()
-    timestamp = datetime.timestamp(now)
+    filename = "tmp/" + new_file_name + '.mp3'
+    combined.export(filename, format="mp3")
 
-    wav_list = []
-    combined_wav = AudioSegment.empty()
-
-    for f in filename_list:
-        wav_list.append(AudioSegment.from_wav(f))
-
-    for w in wav_list:
-        combined_wav += w
-
-    filename = "static/generatedAudio/" + str(timestamp) + str(random.randint(1, 20)) + '.wav'
-    combined_wav.export(filename, format="wav")
     return filename
-
 
 
 def checkEnds(line, ends):

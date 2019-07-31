@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef5d62f1-4166-4c81-bd60-2ef3bff469dd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/dbconn/db_aggregation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tacotron2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tacotron2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apex" beforeDir="false" afterPath="$PROJECT_DIR$/apex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/RNN/README.md" beforeDir="false" />
@@ -54,6 +57,9 @@
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/reparameterization.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/weight_norm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend_helpers/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_helpers/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dbconn/db_conn.py" beforeDir="false" afterPath="$PROJECT_DIR$/dbconn/db_conn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,13 +78,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="CSS File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1OjSV3YZTkDK1vshICbWsjB0lP1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -202,7 +211,10 @@
       <workItem from="1563093705121" duration="63765000" />
       <workItem from="1563355013454" duration="28572000" />
       <workItem from="1563858507362" duration="26233000" />
-      <workItem from="1564489539144" duration="42011000" />
+      <workItem from="1564489539144" duration="45246000" />
+      <workItem from="1564609453184" duration="864000" />
+      <workItem from="1564611182233" duration="58000" />
+      <workItem from="1564611286806" duration="3661000" />
     </task>
     <servers />
   </component>
@@ -250,37 +262,27 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>190</line>
+          <line>206</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>201</line>
+          <line>217</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dbconn/db_conn.py</url>
-          <line>69</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dbconn/db_conn.py</url>
-          <line>68</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/inference.py</url>
-          <line>46</line>
-          <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/inference.py</url>
           <line>47</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/inference.py</url>
+          <line>48</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>236</line>
+          <line>252</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
       </breakpoints>

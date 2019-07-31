@@ -32,7 +32,7 @@ from flask import request, render_template, Response
 from flask import send_file
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
-from dbconn import db_conn
+from dbconn import db_conn, db_aggregation
 from inference import Inference
 from backend_helpers import helper, log
 from backend_helpers.s3_storage import S3Storage
@@ -61,6 +61,15 @@ cursor = None
 
 logger = log.setup_custom_logger('root')
 
+
+class AggData(object):
+    def __init__(self, filename, audio_length, job_text_id):
+        self.filename = filename
+        self.audio_length = audio_length
+        self.job_text_id = job_text_id
+        self.audio_length_percent = 0
+
+
 @app.route('/audioy', methods=['POST'])
 def getdata():
     json_val = request.json
@@ -79,17 +88,21 @@ def getdata():
 
     count = 0
     sentence_list = helper.split_sentences(data)
+    agg_list = []
     #split the inference / sending back apart as two different operations to allow for buffering
 
     for sentence in sentence_list:
         job_text_id = job_id + '_' + str(count)
-        inference.infer(sentence, job_text_id)
+        audio_length = inference.infer(sentence, job_text_id)
         filename = "tmp/" + job_text_id + ".mp3"
+        agg_list.append(AggData(filename, audio_length, job_text_id))
+
         s3_filename = job_text_id + ".mp3"
-        db_conn.perform_insert_job_text(job_id, sentence, 1, count)
+        db_conn.perform_insert_job_text(job_id, sentence, audio_length, count)
         count += 1
 
         #upload file and verify success otherwise ignore and continue - check that file exists
+
         response = s3_client.store_data("audiomodelstts", filename, s3_filename)
 
         data = {'request_id': "asdf",
@@ -99,7 +112,10 @@ def getdata():
                 'job_id': s3_filename}
 
         json_data = json.dumps(data)
-        print(json_data)
+        #start background thread - merge files - write to db - propagate changes to frontend
+        db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
+        #update main table
+
         return json_data
 
         #emit('getdata', {'data': json_data}, broadcast=False, include_self=True)

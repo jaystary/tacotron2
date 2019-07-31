@@ -61,8 +61,11 @@ cursor = None
 
 logger = log.setup_custom_logger('root')
 
-@app.route('/audioy')
-def getdata(data, user):
+@app.route('/audioy', methods=['POST'])
+def getdata():
+    json_val = request.json
+    data = json_val['message']
+    user = json_val['user']
 
     record = db_conn.perform_query(user)
 
@@ -82,27 +85,27 @@ def getdata(data, user):
         job_text_id = job_id + '_' + str(count)
         inference.infer(sentence, job_text_id)
         filename = "tmp/" + job_text_id + ".mp3"
-        s3_filename = job_text_id + ".mp3
+        s3_filename = job_text_id + ".mp3"
         db_conn.perform_insert_job_text(job_id, sentence, 1, count)
         count += 1
 
         #upload file and verify success otherwise ignore and continue - check that file exists
         response = s3_client.store_data("audiomodelstts", filename, s3_filename)
 
-       data = {'request_id': "asdf",
+        data = {'request_id': "asdf",
                 'timestamp': int(time.time()),
                 'sentence': sentence,
                 'audio_id': count,
                 'job_id': s3_filename}
 
         json_data = json.dumps(data)
+        print(json_data)
         return json_data
 
         #emit('getdata', {'data': json_data}, broadcast=False, include_self=True)
 
     #Once all data is done merge the file and record in jobs (Link)
 
-getdata("Hello World. How are you.", "jay")
 
 def background_thread():
     """Example of how to send server generated events to clients."""
@@ -225,8 +228,7 @@ def audio():
 
     p.terminate()
     '''
-    d = make_summary()
-    return jsonify(d)
+
 
 
 @app.route('/')

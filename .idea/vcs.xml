@@ -3,5 +3,8 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/apex" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/audio" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/waveglow" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/waveglow/tacotron2" vcs="Git" />
   </component>
 </project>

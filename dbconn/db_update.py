@@ -1,7 +1,7 @@
 import logging
 
 logger = logging.getLogger('root')
-
+'''
 def update(conn, cursor, sql):
     try:
         cursor.execute(sql)
@@ -11,3 +11,4 @@ def update(conn, cursor, sql):
     except:
         logger.error("Update failed")
         return false
+'''

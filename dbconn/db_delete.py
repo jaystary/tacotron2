@@ -1,7 +1,7 @@
 import logging
 
 logger = logging.getLogger('root')
-
+'''
 def delete(conn, cursor, sql):
     try:
         cursor.execute(sql)
@@ -11,3 +11,4 @@ def delete(conn, cursor, sql):
     except:
         logger.error("Error delete")
         return false
+'''

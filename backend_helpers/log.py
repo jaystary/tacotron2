@@ -26,3 +26,6 @@ def setup_custom_logger(name):
     logger.addHandler(consoleHandler)
 
     return logger
+
+def hello_world():
+    print("Hello")

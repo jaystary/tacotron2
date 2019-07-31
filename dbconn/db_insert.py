@@ -2,7 +2,7 @@ import logging
 
 logger = logging.getLogger('root')
 
-
+'''
 def insert(conn, cursor, sql):
     try:
         cursor.execute(sql);
@@ -12,3 +12,4 @@ def insert(conn, cursor, sql):
     except:
         logger.warning("error insert")
         return false
+'''

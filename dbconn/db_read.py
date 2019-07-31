@@ -1,7 +1,7 @@
 import logging
 
 logger = logging.getLogger('root')
-
+'''
 def read(conn, cursor, sql):
     try:
         cursor.execute(sql)
@@ -19,3 +19,4 @@ def read(conn, cursor, sql):
     except:
         logger.error("Read failed")
         return false
+'''

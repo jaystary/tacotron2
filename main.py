@@ -1,6 +1,3 @@
-#from gevent import monkey
-#monkey.patch_all()
-
 async_mode = None
 
 if async_mode is None:
@@ -22,8 +19,6 @@ if async_mode is None:
 
     print('async_mode is ' + async_mode)
 
-# monkey patching is necessary because this application uses a background
-# thread
 if async_mode == 'eventlet':
     import eventlet
     eventlet.monkey_patch()
@@ -31,37 +26,29 @@ elif async_mode == 'gevent':
     from gevent import monkey
     monkey.patch_all()
 
-import time
 from threading import Thread
 from flask import Flask, jsonify, json
 from flask import request, render_template, Response
 from flask import send_file
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
-import psycopg2
 from dbconn import db_conn
-
-import queue
-from backend_helpers import helper
-# import audio_processing as ap
+from inference import Inference
+from backend_helpers import helper, log
+from backend_helpers.s3_storage import S3Storage
 import datetime
 import pyaudio
 import wave
 import io
 import time
-import asyncio
-import itertools
-from backend_helpers import log
 
 
-
-# from inference import Inference
 
 CHUNK = 4096
 PORT = 8888
 
-# inference = Inference()
-# inference.load_model()
+inference = Inference()
+inference.load_model()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'development key'
@@ -71,34 +58,51 @@ CORS(app)
 thread = None
 conn = None
 cursor = None
-#results = db_conn.perform_query("select * from tschema.users")
-#db_conn.perform_insert_register_users("Jay1", "Juergen1")
-#for r in results:
-#    print(r['registered'])
-getdata("Hello World. How are you", "jay")
 
+logger = log.setup_custom_logger('root')
+
+@app.route('/audioy')
 def getdata(data, user):
 
-    #lookup uid
     record = db_conn.perform_query(user)
 
+    if record == None:
+        return None
 
-    #Chop up sentences and send back clustered data
+    s3_client = S3Storage()
+
+    headline = (data[:75] + '..') if len(data) > 75 else data
+    job_id = db_conn.perform_insert_jobs(record['uid'], 0,1,headline)
+
     count = 0
     sentence_list = helper.split_sentences(data)
-    for sentence in sentence_list:
-        # write to database
-        job_id = db_conn.perform_insert_jobs()
+    #split the inference / sending back apart as two different operations to allow for buffering
 
-        data = {'request_id': request.sid,
+    for sentence in sentence_list:
+        job_text_id = job_id + '_' + str(count)
+        inference.infer(sentence, job_text_id)
+        filename = "tmp/" + job_text_id + ".mp3"
+        s3_filename = job_text_id + ".mp3
+        db_conn.perform_insert_job_text(job_id, sentence, 1, count)
+        count += 1
+
+        #upload file and verify success otherwise ignore and continue - check that file exists
+        response = s3_client.store_data("audiomodelstts", filename, s3_filename)
+
+       data = {'request_id': "asdf",
                 'timestamp': int(time.time()),
                 'sentence': sentence,
                 'audio_id': count,
-                'job_id': 1 }
-        json_data = json.dumps(data)
-        emit('getdata', {'data': json_data}, broadcast=False, include_self=True)
+                'job_id': s3_filename}
 
-logger = log.setup_custom_logger('root')
+        json_data = json.dumps(data)
+        return json_data
+
+        #emit('getdata', {'data': json_data}, broadcast=False, include_self=True)
+
+    #Once all data is done merge the file and record in jobs (Link)
+
+getdata("Hello World. How are you.", "jay")
 
 def background_thread():
     """Example of how to send server generated events to clients."""
@@ -238,5 +242,4 @@ def index():
 
 
 if __name__ == "__main__":
-    #app.run(host="localhost", port=PORT, debug=True)
     socketio.run(app, debug=True, port=8888)

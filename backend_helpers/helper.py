@@ -22,7 +22,8 @@ def split_sentences(sentence):
 
     return que_list
 
-
+def get_unique_filename():
+    return "";
 
 def example(seconds):
     print('Starting task')
@@ -31,7 +32,7 @@ def example(seconds):
         time.sleep(1)
     print('Task completed')
 
-'''
+
 def merge_wav(filename_list):
 
     now = datetime.now()
@@ -49,7 +50,7 @@ def merge_wav(filename_list):
     filename = "static/generatedAudio/" + str(timestamp) + str(random.randint(1, 20)) + '.wav'
     combined_wav.export(filename, format="wav")
     return filename
-'''
+
 
 
 def checkEnds(line, ends):

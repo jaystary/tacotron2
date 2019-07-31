@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2 import extras
 from psycopg2.pool import SimpleConnectionPool
 from contextlib import contextmanager
-from dbconn import settings
+from settings import settings
 import uuid
 from datetime import datetime
 import logging
@@ -42,18 +42,26 @@ def perform_query(user_name, data=None):
     records = None
     sql = "select uid from tschema.users where user_name = %s"
     with get_cursor("read") as cursor:
-        sql = cursor.mogrify(sql, (user_name))
-        cursor.execute(sql, data)
-        records = cursor.fetchone()
+        try:
+            sql = cursor.mogrify(sql, (user_name,))
+            cursor.execute(sql, data)
+            records = cursor.fetchone()
+        except Exception as e:
+            logger.error("Registration failed", e)
+
     return records
+
 
 def perform_query_jobs(user_name, data=None):
     records = None
     sql = "select uid from tschema.users where user_name = %s"
     with get_cursor("read") as cursor:
-        sql = cursor.mogrify(sql, (user_name))
-        cursor.execute(sql, data)
-        records = cursor.fetchone()
+        try:
+            sql = cursor.mogrify(sql, (user_name,))
+            cursor.execute(sql, data)
+            records = cursor.fetchone()
+        except Exception as e:
+            logger.error("Registration failed", e)
     return records
 #####################################
 
@@ -70,31 +78,32 @@ def perform_insert_register_users(user_name, first_name):
 
 
 #####################################
-def perform_insert_jobs(user_id, link, order_id, delivery_type, chunk_size, headline):
+def perform_insert_jobs(users_uid, delivery_type, chunk_size, headline):
     job_id = str(uuid.uuid1())
     dt = datetime.now()
     with get_cursor("write") as cursor:
         try:
             dt = datetime.now()
             cursor.execute(
-                'INSERT INTO tschema.jobs (uid, users_id, link, created, delivery_type, chunk_size, headline) VALUES (%s, %s, %s, %s, %s, %s, %s);',
-                (job_id, user_id, link, dt, delivery_type, chunk_size, headline))
+                'INSERT INTO tschema.jobs (uid, users_uid, created, delivery_type, chunk_size, headline) VALUES (%s, %s, %s, %s, %s, %s);',
+                (job_id, users_uid, dt, delivery_type, chunk_size, headline))
         except Exception as e:
             logger.error("Insert failed", e)
     return job_id
 
 
 def perform_insert_job_text(job_id, job_text, duration, order_id):
+    job_text_id = str(uuid.uuid1())
     dt = datetime.now()
     with get_cursor("write") as cursor:
         try:
             dt = datetime.now()
             cursor.execute(
-                'INSERT INTO tschema.job_text (job_text_uid, job_text, duration, order_id) VALUES (%s, %s, %s, %s);',
-                (job_id, job_text, duration, order_id))
+                'INSERT INTO tschema.job_text (job_text_uid, jobs_uid, job_text, duration, order_id) VALUES (%s, %s, %s, %s, %s);',
+                (job_text_id, job_id, job_text, duration, order_id))
         except Exception as e:
             logger.error("Insert failed", e)
-    return text_id
+    return job_text_id
 #####################################
 
 

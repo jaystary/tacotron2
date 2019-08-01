@@ -83,13 +83,12 @@ def getdata():
 
     s3_client = S3Storage()
 
-    headline = (data[:75] + '..') if len(data) > 75 else data
-    job_id = db_conn.perform_insert_jobs(record['uid'], 0,1,headline)
+    headline = (data[:70] + '..') if len(data) > 70 else data
+    job_id = db_conn.perform_insert_jobs(record['uid'], 0, 1, headline)
 
     count = 0
     sentence_list = helper.split_sentences(data)
     agg_list = []
-    #split the inference / sending back apart as two different operations to allow for buffering
 
     for sentence in sentence_list:
         job_text_id = job_id + '_' + str(count)
@@ -112,11 +111,10 @@ def getdata():
                 'job_id': s3_filename}
 
         json_data = json.dumps(data)
-        #start background thread - merge files - write to db - propagate changes to frontend
-        db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
-        #update main table
+    #start background thread - merge files - write to db - propagate changes to frontend
+    db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
 
-        return json_data
+    return json_data
 
         #emit('getdata', {'data': json_data}, broadcast=False, include_self=True)
 
@@ -260,4 +258,6 @@ def index():
 
 
 if __name__ == "__main__":
+    from gevent import monkey
+    monkey.patch_all()
     socketio.run(app, debug=True, port=8888)

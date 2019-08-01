@@ -14,6 +14,7 @@ from train import load_model
 from text import text_to_sequence
 from waveglow.denoiser import Denoiser
 from mutagen.mp3 import MP3
+import logger
 
 
 class Inference:
@@ -46,7 +47,7 @@ class Inference:
 
             self.denoiser = Denoiser(self.waveglow)
         except Exception as e:
-            logger.error("Connection failed", e)
+            logger.error("Inference failed", e)
 
 
     def infer(self, sentence, job_text_id):
@@ -68,6 +69,7 @@ class Inference:
         try:
             torchaudio.save(filename, audio_denoised, self.hparams.sampling_rate)
             audio = MP3(filename)
+            print(audio.info.length)
             return audio.info.length
         except Exception as e:
             logger.error("Inference failed", e)

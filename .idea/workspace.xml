@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef5d62f1-4166-4c81-bd60-2ef3bff469dd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/dbconn/db_aggregation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/tacotron2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tacotron2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apex" beforeDir="false" afterPath="$PROJECT_DIR$/apex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/RNN/README.md" beforeDir="false" />
@@ -58,6 +55,7 @@
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/reparameterization.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/weight_norm.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend_helpers/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_helpers/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dbconn/db_aggregation.py" beforeDir="false" afterPath="$PROJECT_DIR$/dbconn/db_aggregation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dbconn/db_conn.py" beforeDir="false" afterPath="$PROJECT_DIR$/dbconn/db_conn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -106,7 +104,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
+    <property name="settings.editor.selected.configurable" value="reference.idesettings.debugger.python" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -117,6 +115,9 @@
         <option name="myAddSourceRoots" value="false" />
       </console-settings>
     </option>
+  </component>
+  <component name="PyDebuggerOptionsProvider">
+    <option name="mySupportGeventDebugging" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -214,7 +215,7 @@
       <workItem from="1564489539144" duration="45246000" />
       <workItem from="1564609453184" duration="864000" />
       <workItem from="1564611182233" duration="58000" />
-      <workItem from="1564611286806" duration="3661000" />
+      <workItem from="1564611286806" duration="14580000" />
     </task>
     <servers />
   </component>
@@ -262,33 +263,33 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>206</line>
+          <line>204</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>217</line>
+          <line>215</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/inference.py</url>
-          <line>47</line>
+          <line>48</line>
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/inference.py</url>
-          <line>48</line>
+          <line>49</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>252</line>
+          <line>250</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/tacotron2$main.coverage" NAME="main Coverage Results" MODIFIED="1564585857391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tacotron2$main.coverage" NAME="main Coverage Results" MODIFIED="1564674036238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

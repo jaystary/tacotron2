@@ -106,4 +106,24 @@ def perform_insert_job_text(job_id, job_text, duration, order_id):
     return job_text_id
 #####################################
 
+def perform_update_jobs(job_id, agg_duration):
+    with get_cursor("write") as cursor:
+        try:
+            cursor.execute(
+                'UPDATE tschema.jobs SET agg_duration = %s WHERE uid = %s;',
+                (agg_duration, job_id))
+        except Exception as e:
+            logger.error("Update failed", e)
+
+
+def perform_update_jobs_text(job_id, order_id, duration_per):
+    with get_cursor("write") as cursor:
+        try:
+            cursor.execute(
+                'UPDATE tschema.job_text SET duration_per = %s WHERE jobs_uid = %s AND order_id = %s;',
+                (duration_per, job_id, order_id))
+        except Exception as e:
+            logger.error("Update failed", e)
+
+
 

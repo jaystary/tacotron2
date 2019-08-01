@@ -26,7 +26,11 @@ def merge_wav(agg_list, new_file_name):
     combined = AudioSegment.empty()
 
     for f in agg_list:
-        audio_list.append(AudioSegment.from_mp3(f.filename))
+        try:
+            res = AudioSegment.from_mp3(f.filename)
+            audio_list.append(res)
+        except Exception as e:
+            logging("Error", e)
 
     for w in audio_list:
         combined += w

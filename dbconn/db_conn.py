@@ -3,6 +3,7 @@ from psycopg2 import extras
 from psycopg2.pool import SimpleConnectionPool
 from contextlib import contextmanager
 from settings import settings
+from flask import json
 import uuid
 from datetime import datetime
 import logging
@@ -54,12 +55,12 @@ def perform_query(user_name, data=None):
 
 def perform_query_jobs(user_uid, data=None):
     records = None
-    sql = "select uid, created, headline, agg_duration  from tschema.jobs where user_uid = %s order by created desc"
+    sql = "select uid, created, headline, agg_duration  from tschema.jobs where users_uid = %s order by created desc"
     with get_cursor("read") as cursor:
         try:
-            sql = cursor.mogrify(sql, (user_name,))
-            cursor.execute(sql, data)
-            records = cursor.fetchall()
+            sql = cursor.mogrify(sql, (user_uid,))
+            cursor.execute(sql)
+            records = json.dumps(cursor.fetchall())
         except Exception as e:
             logger.error("Registration failed", e)
     return records
@@ -124,6 +125,9 @@ def perform_update_jobs_text(job_id, order_id, duration_per):
                 (duration_per, job_id, order_id))
         except Exception as e:
             logger.error("Update failed", e)
+
+##################
+
 
 
 

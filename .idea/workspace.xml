@@ -54,10 +54,7 @@
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/reparameterization.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/weight_norm.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend_helpers/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend_helpers/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dbconn/db_aggregation.py" beforeDir="false" afterPath="$PROJECT_DIR$/dbconn/db_aggregation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dbconn/db_conn.py" beforeDir="false" afterPath="$PROJECT_DIR$/dbconn/db_conn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/inference.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -83,9 +80,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1OjSV3YZTkDK1vshICbWsjB0lP1" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -215,7 +209,7 @@
       <workItem from="1564489539144" duration="45246000" />
       <workItem from="1564609453184" duration="864000" />
       <workItem from="1564611182233" duration="58000" />
-      <workItem from="1564611286806" duration="14580000" />
+      <workItem from="1564611286806" duration="33970000" />
     </task>
     <servers />
   </component>
@@ -262,16 +256,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>204</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>215</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/inference.py</url>
           <line>48</line>
           <option name="timeStamp" value="46" />
@@ -283,13 +267,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>250</line>
-          <option name="timeStamp" value="57" />
+          <line>108</line>
+          <option name="timeStamp" value="84" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/tacotron2$main.coverage" NAME="main Coverage Results" MODIFIED="1564674036238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/tacotron2$main.coverage" NAME="main Coverage Results" MODIFIED="1564832971276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

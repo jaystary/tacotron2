@@ -27,19 +27,15 @@ elif async_mode == 'gevent':
     monkey.patch_all()
 
 from threading import Thread
-from flask import Flask, jsonify, json
-from flask import request, render_template, Response
-from flask import send_file
+from flask import Flask, json
+from flask import request, Response
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from dbconn import db_conn, db_aggregation
 from inference import Inference
 from backend_helpers import helper, log
 from backend_helpers.s3_storage import S3Storage
-import datetime
-import pyaudio
-import wave
-import io
+
 import time
 
 
@@ -53,7 +49,8 @@ inference.load_model()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'development key'
 socketio = SocketIO(app, async_mode=async_mode)
-CORS(app)
+cors = CORS(app, resources={r"/": {"origins": ""}})
+#CORS(app)
 
 thread = None
 conn = None
@@ -70,11 +67,16 @@ class AggData(object):
         self.audio_length_percent = 0
 
 
-@app.route('/audioy', methods=['POST'])
-def getdata():
-    json_val = request.json
-    data = json_val['message']
-    user = json_val['user']
+#@app.route('/audioy', methods=['POST'])
+@socketio.on('send_message')
+def getdata(send_message):
+    try:
+        tmpVal = json.loads(send_message['body'])
+        data = tmpVal['message']
+        user = tmpVal['user']
+    except Exception as e:
+        logger.error("Wrong input - return null", e)
+        return ""
 
     record = db_conn.perform_query(user)
 
@@ -110,15 +112,39 @@ def getdata():
                 'audio_id': count,
                 'job_id': s3_filename}
 
+        #emit
         json_data = json.dumps(data)
+        emit('message', {'data': json_data}, broadcast=False, include_self=True)
+
     #start background thread - merge files - write to db - propagate changes to frontend
     db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
 
-    return json_data
+#@app.route('/audioy', methods=['POST'])
+@socketio.on('get_table')
+def gettable():
+    db_results = []
+    user = ""
+    uid = ""
+    record = None
 
-        #emit('getdata', {'data': json_data}, broadcast=False, include_self=True)
+    try:
+        tmp_val = json.loads(get_table['body'])
+        user = tmp_val['user']
+        uid = tmp_val['uid']
+    except Exception as e:
+        logger.error("Wrong input - return null", e)
+        return ""
 
-    #Once all data is done merge the file and record in jobs (Link)
+
+    try:
+        if uid == "":
+            record = db_conn.perform_query(user)
+            db_results = db_conn.perform_query_jobs(record['uid'])
+    except Exception as e:
+        logger.error("No result for table", e)
+        return ""
+
+    return db_results
 
 
 def background_thread():
@@ -147,67 +173,8 @@ def disconnect():
     print("disconnecting")
     data = {'request_id': request.sid,
             'timestamp': int(time.time())}
-
-
-@socketio.on('getdata', namespace='/audiostream')
-def getdata(data, user):
-
-    #lookup uid
-
-    #write to database
-
-    #Chop up sentences and send back clustered data
-    count = 0
-    sentence_list = helper.split_sentences(data)
-    for sentence in sentence_list:
-
-        data = {'request_id': request.sid,
-                'timestamp': int(time.time()),
-                'sentence': sentence,
-                'audio_id': count,
-                'job_id': 1 }
-        json_data = json.dumps(data)
-        emit('getdata', {'data': json_data}, broadcast=False, include_self=True)
-        count += 1
-        socketio.sleep(0)
-
-    #Merge all files into 1 and then send this file when its required again
-    #Write first sentence to DB and store properties of file
-
-
-
-
-
-#@socketio.on('send_message')
-#    def handle_source(json_data):
-#        text = json_data['message'].encode('ascii', 'ignore')
-#        emit('echo', {'echo': 'Server Says: '+text}, broadcast=True, include_self=False)
-
-
-#def process_text(message):
-
-
-
-@app.route('/infer_tts', methods=['GET', 'POST'])
-def text():
-    #val = request.json
-    #val = val['sentence']
-
-    #sentence_list = helper.split_sentences(val)
-    #print(sentence_list)
-
-
-
-    def generate():
-
-        yield jsonify({'some': 'data'})
-        #while True:
-        #    yield "data: %s\n\n" % sentence_list.get()
-        #    sentence_list.task_done()
-        #    time.sleep(1)
-
-
-    return Response(generate(), content_type='text/event-stream')
+    json_data = json.dumps(data)
+    emit('echo', {'data': json_data}, broadcast=False, include_self=True)
 
 
 @app.route('/audiox')
@@ -247,17 +214,16 @@ def audio():
 
 @app.route('/')
 def index():
-    print("test")
-    response.headers.add('Access-Control-Allow-Origin', '*')
+    Response.headers.add('Access-Control-Allow-Origin', '*')
     global thread
     if thread is None:
         thread = Thread(target=background_thread)
         thread.daemon = True
         thread.start()
-    #return render_template('audio.html')
+    return ""
 
 
 if __name__ == "__main__":
     from gevent import monkey
     monkey.patch_all()
-    socketio.run(app, debug=True, port=8888)
+    socketio.run(app, debug=True, port=8888, host="0.0.0.0")

@@ -50,7 +50,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'development key'
 socketio = SocketIO(app, async_mode=async_mode)
 cors = CORS(app, resources={r"/": {"origins": ""}})
-#CORS(app)
+CORS(app)
 
 thread = None
 conn = None
@@ -71,9 +71,9 @@ class AggData(object):
 @socketio.on('send_message')
 def getdata(send_message):
     try:
-        tmpVal = json.loads(send_message['body'])
-        data = tmpVal['message']
-        user = tmpVal['user']
+        tmp_val = json.loads(send_message['body'])
+        data = tmp_val['message']
+        user = tmp_val['user']
     except Exception as e:
         logger.error("Wrong input - return null", e)
         return ""
@@ -106,31 +106,49 @@ def getdata(send_message):
 
         response = s3_client.store_data("audiomodelstts", filename, s3_filename)
 
-        data = {'request_id': "asdf",
-                'timestamp': int(time.time()),
-                'sentence': sentence,
+        data = {
+                'id': str(time.time()),
+                'duration': "asdf",
+                'title': "asdf",
+                'download': "asdf",
+                'messages': sentence,
                 'audio_id': count,
-                'job_id': s3_filename}
+                'playerURLs': s3_filename
+                }
 
         #emit
         json_data = json.dumps(data)
         emit('message', {'data': json_data}, broadcast=False, include_self=True)
 
-    #start background thread - merge files - write to db - propagate changes to frontend
-    db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
 
-#@app.route('/audioy', methods=['POST'])
-@socketio.on('get_table')
-def gettable():
+    #start background thread - merge files - write to db - propagate changes to frontend
+    #db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
+    data = {
+            'user': user,
+            'uid': record['uid']
+            }
+
+
+    #get_table = json.dumps(data)
+    gettable(None, data)
+
+
+@app.route('/audioy', methods=['POST'])
+#@socketio.on('get_table')
+def gettable(get_table=None, dataObj = None):
     db_results = []
     user = ""
     uid = ""
     record = None
-
+    tmp_val = None
     try:
-        tmp_val = json.loads(get_table['body'])
-        user = tmp_val['user']
-        uid = tmp_val['uid']
+        if get_table is None:
+            user = dataObj['user']
+            uid = dataObj['uid']
+        else:
+            tmp_val = json.loads(get_table['body'])
+            user = tmp_val['user']
+            uid = tmp_val['uid']
     except Exception as e:
         logger.error("Wrong input - return null", e)
         return ""
@@ -140,11 +158,24 @@ def gettable():
         if uid == "":
             record = db_conn.perform_query(user)
             db_results = db_conn.perform_query_jobs(record['uid'])
+        else:
+            db_results = db_conn.perform_query_jobs(uid)
     except Exception as e:
         logger.error("No result for table", e)
         return ""
 
-    return db_results
+    data = {
+        'id': "1",
+        'date': "12.23.2910",
+        'duration': "1.40",
+        'title': "Hello World",
+        'download': "asdf.mp3",
+        'delete': "asdfxx.html"
+    }
+
+    json_data = json.dumps(data)
+    emit('message', {'data': json_data}, broadcast=False, include_self=True)
+    #return db_results
 
 
 def background_thread():

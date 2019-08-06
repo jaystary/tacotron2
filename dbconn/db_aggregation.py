@@ -5,6 +5,7 @@ import os
 
 def aggregate_job_results(agg_list, job_id, s3_client):
 
+    filename = ""
     audio_length = sum(res.audio_length for res in agg_list)
 
     if len(agg_list) > 1:

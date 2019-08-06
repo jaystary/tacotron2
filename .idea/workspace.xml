@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef5d62f1-4166-4c81-bd60-2ef3bff469dd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apex" beforeDir="false" afterPath="$PROJECT_DIR$/apex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/RNN/README.md" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/RNN/RNNBackend.py" beforeDir="false" />
@@ -55,6 +55,7 @@
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/reparameterization.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apex/apex/reparameterization/weight_norm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -212,7 +213,7 @@
       <workItem from="1564874091174" duration="2480000" />
       <workItem from="1565005870308" duration="2329000" />
       <workItem from="1565033807450" duration="549000" />
-      <workItem from="1565034651999" duration="21515000" />
+      <workItem from="1565034651999" duration="23357000" />
     </task>
     <servers />
   </component>

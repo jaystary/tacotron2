@@ -9,6 +9,7 @@ DB_PASSWORD = 'password'
 
 
 
+
 '''
 Developer mode setting: True or False
 '''

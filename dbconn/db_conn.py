@@ -55,15 +55,33 @@ def perform_query(user_name, data=None):
 
 def perform_query_jobs(user_uid, data=None):
     records = None
+    record_list = []
     sql = "select uid, created, headline, agg_duration  from tschema.jobs where users_uid = %s order by created desc"
     with get_cursor("read") as cursor:
         try:
             sql = cursor.mogrify(sql, (user_uid,))
             cursor.execute(sql)
-            records = json.dumps(cursor.fetchall())
+            records = cursor.fetchall()
+            for r in records:
+                agg_val = "0"
+                if r['agg_duration'] is None:
+                    agg_val = "0"
+                else:
+                    agg_val = r['agg_duration']
+
+                data = {
+                    'id': r['uid'],
+                    'date': r['created'].strftime('%d.%m.%Y'),
+                    'duration': agg_val,
+                    'title': r['headline'],
+                    'download': r['uid'],
+                    'delete': r['uid']
+                }
+
+                record_list.append(data)
         except Exception as e:
             logger.error("Registration failed", e)
-    return records
+    return record_list
 #####################################
 
 def perform_insert_register_users(user_name, first_name):

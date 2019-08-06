@@ -42,6 +42,7 @@ import time
 
 CHUNK = 4096
 PORT = 8888
+S3BUCKET = "https://audiomodelstts.s3.eu-central-1.amazonaws.com/"
 
 inference = Inference()
 inference.load_model()
@@ -67,7 +68,6 @@ class AggData(object):
         self.audio_length_percent = 0
 
 
-#@app.route('/audioy', methods=['POST'])
 @socketio.on('send_message')
 def getdata(send_message):
     try:
@@ -102,57 +102,43 @@ def getdata(send_message):
         db_conn.perform_insert_job_text(job_id, sentence, audio_length, count)
         count += 1
 
-        #upload file and verify success otherwise ignore and continue - check that file exists
-
         response = s3_client.store_data("audiomodelstts", filename, s3_filename)
-
+        print(sentence)
         data = {
                 'id': str(time.time()),
-                'duration': "asdf",
-                'title': "asdf",
-                'download': "asdf",
-                'messages': sentence,
+                'downloadURL': S3BUCKET+s3_filename,
+                'sentence': sentence,
+                'duration': str(audio_length),
                 'audio_id': count,
-                'playerURLs': s3_filename
+                'job_id': S3BUCKET+s3_filename
                 }
 
-        #emit
-        json_data = json.dumps(data)
-        emit('message', {'data': json_data}, broadcast=False, include_self=True)
+        emit('player', {'data': data}, broadcast=False, include_self=True)
 
 
     #start background thread - merge files - write to db - propagate changes to frontend
-    #db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
+    db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
     data = {
             'user': user,
             'uid': record['uid']
             }
 
-
-    #get_table = json.dumps(data)
-    gettable(None, data)
+    gettable(data)
 
 
-@app.route('/audioy', methods=['POST'])
-#@socketio.on('get_table')
-def gettable(get_table=None, dataObj = None):
+@socketio.on('get_table')
+def gettable(get_table=None):
     db_results = []
     user = ""
     uid = ""
     record = None
     tmp_val = None
     try:
-        if get_table is None:
-            user = dataObj['user']
-            uid = dataObj['uid']
-        else:
-            tmp_val = json.loads(get_table['body'])
-            user = tmp_val['user']
-            uid = tmp_val['uid']
+        user = get_table['user']
+        uid = get_table['uid']
     except Exception as e:
         logger.error("Wrong input - return null", e)
         return ""
-
 
     try:
         if uid == "":
@@ -164,18 +150,7 @@ def gettable(get_table=None, dataObj = None):
         logger.error("No result for table", e)
         return ""
 
-    data = {
-        'id': "1",
-        'date': "12.23.2910",
-        'duration': "1.40",
-        'title': "Hello World",
-        'download': "asdf.mp3",
-        'delete': "asdfxx.html"
-    }
-
-    json_data = json.dumps(data)
-    emit('message', {'data': json_data}, broadcast=False, include_self=True)
-    #return db_results
+    emit('table', {'data': db_results}, broadcast=False, include_self=True)
 
 
 def background_thread():
@@ -206,41 +181,6 @@ def disconnect():
             'timestamp': int(time.time())}
     json_data = json.dumps(data)
     emit('echo', {'data': json_data}, broadcast=False, include_self=True)
-
-
-@app.route('/audiox')
-def audio():
-    '''
-    p = pyaudio.PyAudio()
-    wf = wave.open('sample1.wav', 'rb')
-
-    def generate():
-        stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-                        channels=wf.getnchannels(),
-                        rate=wf.getframerate(),
-                        output=True)
-
-        @asyncio.coroutine
-        def stream_audio():
-            data = wf.readframes(CHUNK)
-            while True:
-                stream.write(data)
-                data=wf.readframes(CHUNK)
-
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        cors = asyncio.wait([stream_audio()])
-        loop.run_until_complete(cors)
-
-        loop.close()
-
-
-
-    return Response(generate(), mimetype='application/json')
-
-    p.terminate()
-    '''
-
 
 
 @app.route('/')

@@ -20,7 +20,7 @@ def split_sentences(sentence):
 
     return que_list
 
-def merge_wav(agg_list, new_file_name):
+def merge_wav(agg_list, file_name):
 
     audio_list = []
     combined = AudioSegment.empty()
@@ -31,14 +31,13 @@ def merge_wav(agg_list, new_file_name):
             audio_list.append(res)
         except Exception as e:
             logging("Error", e)
+            return False
 
     for w in audio_list:
         combined += w
 
-    filename = "tmp/" + new_file_name + '.mp3'
-    combined.export(filename, format="mp3")
-
-    return filename
+    combined.export(file_name, format="mp3")
+    return True
 
 
 def checkEnds(line, ends):

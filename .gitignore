@@ -170,4 +170,4 @@ typings/
 
 model/
 settings/
-settings.py
+*settings.py

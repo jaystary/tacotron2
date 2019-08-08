@@ -35,6 +35,6 @@ def aggregate_job_results(agg_list, job_id, s3_client):
     for obj in agg_list:
         if os.path.exists(obj.filename):
             os.remove(obj.filename)
-    return True
+    return audio_length
 
 

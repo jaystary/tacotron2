@@ -8,8 +8,8 @@ import logging
 def split_sentences(sentence):
     que_list = []
     sentence.replace('....', '.').replace('...', '.').replace('..', '.')
-    ends = ['.', '!', '?']
-    split_sentence = re.split(r'[\.\!\?]', sentence)
+    ends = ['.', '!', '?', ':']
+    split_sentence = re.split(r'[\.\!\?\:]', sentence)
     for s in split_sentence:
         if len(s) > 3:
             val = s.strip()

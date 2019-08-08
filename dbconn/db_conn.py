@@ -3,7 +3,6 @@ from psycopg2 import extras
 from psycopg2.pool import SimpleConnectionPool
 from contextlib import contextmanager
 from settings import settings
-from flask import json
 import uuid
 from datetime import datetime
 import logging
@@ -72,7 +71,7 @@ def perform_query_jobs(user_uid, data=None):
                 data = {
                     'id': r['uid'],
                     'date': r['created'].strftime('%d.%m.%Y'),
-                    'duration': agg_val,
+                    'duration': "{0:.2f}".format(agg_val),
                     'title': r['headline'],
                     'download': r['uid'],
                     'delete': r['uid']
@@ -145,7 +144,21 @@ def perform_update_jobs_text(job_id, order_id, duration_per):
             logger.error("Update failed", e)
 
 ##################
+def perform_delete_jobs(job_id):
+    with get_cursor("write") as cursor:
+        try:
+            cursor.execute(
+                'DELETE FROM tschema.job_text WHERE jobs_uid = %s;',
+                (job_id,))
+        except Exception as e:
+            logger.error("Delete jobs_text failed", e)
 
+        try:
+            cursor.execute(
+                'DELETE FROM tschema.jobs WHERE uid = %s;',
+                (job_id,))
+        except Exception as e:
+            logger.error("Delete jobs failed", e)
 
 
 

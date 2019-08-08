@@ -70,6 +70,7 @@ class AggData(object):
 
 @socketio.on('send_message')
 def getdata(send_message):
+    start = time.time()
     try:
         tmp_val = json.loads(send_message['body'])
         data = tmp_val['message']
@@ -117,13 +118,15 @@ def getdata(send_message):
 
 
     #start background thread - merge files - write to db - propagate changes to frontend
-    db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
+    audio_length_total = db_aggregation.aggregate_job_results(agg_list, job_id, s3_client)
     data = {
             'user': user,
             'uid': record['uid']
             }
 
-    gettable(data)
+    status = gettable(data)
+    end = time.time()
+    print("Produced audio length: " + str(audio_length_total) + " Processing time: " + str(end - start))
 
 
 @socketio.on('get_table')
@@ -138,7 +141,7 @@ def gettable(get_table=None):
         uid = get_table['uid']
     except Exception as e:
         logger.error("Wrong input - return null", e)
-        return ""
+        return False
 
     try:
         if uid == "":
@@ -148,9 +151,30 @@ def gettable(get_table=None):
             db_results = db_conn.perform_query_jobs(uid)
     except Exception as e:
         logger.error("No result for table", e)
-        return ""
+        return False
 
     emit('table', {'data': db_results}, broadcast=False, include_self=True)
+    return True
+
+
+@socketio.on('delete_table')
+def delete_entry(delete_table=None):
+
+    uid = ""
+
+    try:
+        uid = delete_table['uid']
+    except Exception as e:
+        logger.error("Wrong input - return null", e)
+        return ""
+
+    try:
+        record = db_conn.perform_delete_jobs(uid)
+    except Exception as e:
+        logger.error("No result for table", e)
+        return ""
+
+    #emit('table', {'data': db_results}, broadcast=False, include_self=True)
 
 
 def background_thread():

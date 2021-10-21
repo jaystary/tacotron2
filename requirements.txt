@@ -1,7 +1,7 @@
 absl-py==0.7.1
 astor==0.8.0
 audioread==2.1.8
-Babel==1.3
+Babel==2.9.1
 boto3==1.9.198
 botocore==1.12.198
 certifi==2019.6.16
